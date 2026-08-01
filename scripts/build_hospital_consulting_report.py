@@ -11,8 +11,10 @@ sys.stdout.reconfigure(encoding='utf-8')
 
 print("Starting Seoul National University Hospital (SNUH) Management Consulting Report Generation (Perfect Visuals)...")
 
-workspace_dir = r"c:\Users\sunjo\Desktop\luca연구에이전트"
-cache_dir = os.path.join(workspace_dir, "_assets_cache")
+script_dir = os.path.dirname(os.path.abspath(__file__))
+skill_root = os.path.dirname(script_dir)
+workspace_dir = os.getcwd()
+cache_dir = os.path.join(skill_root, "knowledge_assets", "_cache")
 os.makedirs(cache_dir, exist_ok=True)
 
 html_path = os.path.join(workspace_dir, "snuh_park_gaeseong_consulting_integrated.html")
