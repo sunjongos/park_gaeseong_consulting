@@ -481,6 +481,65 @@ html_template = """<!DOCTYPE html>
         </p>
     </header>
 
+    <!-- FIRST-TIME READER'S PRIMER BOX -->
+    <div style="background: linear-gradient(135deg, rgba(0, 243, 255, 0.1), rgba(168, 85, 247, 0.1)); border: 2px solid var(--accent-cyan); border-radius: 16px; padding: 25px; margin-bottom: 35px; box-shadow: 0 8px 30px rgba(0, 243, 255, 0.15);">
+        <div style="font-size: 1.3rem; font-weight: 800; color: var(--accent-cyan); margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
+            💡 [처음 보는 독자를 위한 핵심 개념 & 박개성 프레임워크 입문 가이드]
+        </div>
+        <p style="font-size: 0.95rem; color: var(--text-muted);">
+            본 보고서를 처음 읽는 임직원, 장관님, 외부 감사관도 박개성 대표의 병원 경영학 용어(M, T, R, 수리모델)를 100% 이해할 수 있도록 구성된 친절 범례서입니다.
+        </p>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; margin-top: 15px;">
+            <div style="background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 12px; padding: 18px;">
+                <span style="font-size: 0.85rem; font-weight: 800; padding: 3px 10px; border-radius: 4px; display: inline-block; margin-bottom: 8px; background: rgba(0, 243, 255, 0.2); color: var(--accent-cyan);">4M 근육 (Muscles)</span>
+                <h4 style="color: var(--accent-cyan); margin-bottom: 5px;">M1 ~ M4: 4대 조직 근육</h4>
+                <p style="font-size: 0.88rem; color: var(--text-muted);">
+                    병원의 성과를 만들어내는 4가지 핵심 체력.<br>
+                    • <b>M1 Mapping (기획력):</b> 비전 및 미션 수립<br>
+                    • <b>M2 Manpower (인재역량):</b> 보직자 경영 리더십<br>
+                    • <b>M3 Mastery (숙련도):</b> 임상 고난도 수술/의료 품질<br>
+                    • <b>M4 Mechanism (운영체제):</b> 물류·IT·프로세스 체계
+                </p>
+            </div>
+
+            <div style="background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 12px; padding: 18px;">
+                <span style="font-size: 0.85rem; font-weight: 800; padding: 3px 10px; border-radius: 4px; display: inline-block; margin-bottom: 8px; background: rgba(255, 215, 0, 0.2); color: var(--accent-gold);">12대 실행 테마 (Themes)</span>
+                <h4 style="color: var(--accent-gold); margin-bottom: 5px;">T1 ~ T12: 12가지 실행 프로젝트</h4>
+                <p style="font-size: 0.88rem; color: var(--text-muted);">
+                    병원의 문제 부위를 타격하는 12대 프로젝트.<br>
+                    • <b>T6 (물류/구매 20배):</b> 재료비 통합 입찰 절감<br>
+                    • <b>T7 (환자경험/대기):</b> 접수~수납 대기시간 70% 축소<br>
+                    • <b>T9 (마케팅/원외):</b> 1·2차 협력병원 회송 네트워크<br>
+                    • <b>T4/T5 (진료/간호):</b> 중증 중심 진료 & PA 간호사
+                </p>
+            </div>
+
+            <div style="background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 12px; padding: 18px;">
+                <span style="font-size: 0.85rem; font-weight: 800; padding: 3px 10px; border-radius: 4px; display: inline-block; margin-bottom: 8px; background: rgba(255, 71, 87, 0.2); color: var(--accent-red);">4대 경영 공리 (Axioms)</span>
+                <h4 style="color: var(--accent-red); margin-bottom: 5px;">R1 ~ R4: 실패를 방지하는 철칙</h4>
+                <p style="font-size: 0.88rem; color: var(--text-muted);">
+                    박개성 경영학의 변하지 않는 4대 법칙.<br>
+                    • <b>R1 선행타격:</b> 적자 시 T6(구매)/T7(대기) 먼저 타격<br>
+                    • <b>R2 거버넌스 불변:</b> 운영체제 없는 신축은 파산<br>
+                    • <b>R3 구매 20배:</b> 1원 절감 = 매출 20원 효과<br>
+                    • <b>R4 4M 곱셈:</b> $Y = M_1 \times M_2 \times M_3 \times M_4$
+                </p>
+            </div>
+
+            <div style="background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 12px; padding: 18px;">
+                <span style="font-size: 0.85rem; font-weight: 800; padding: 3px 10px; border-radius: 4px; display: inline-block; margin-bottom: 8px; background: rgba(168, 85, 247, 0.2); color: var(--accent-purple);">수리 모델 (KaTeX Formula)</span>
+                <h4 style="color: var(--accent-purple); margin-bottom: 5px;">방정식 기반 정밀 예측</h4>
+                <p style="font-size: 0.88rem; color: var(--text-muted);">
+                    감이나 직관이 아닌 미적분/행렬 기반 성과 측정.<br>
+                    • <b>성과 방정식:</b> $Y = f(\\text{Mission}) \\times \\prod M_j \\times \\sum T_i - \\text{Friction}$<br>
+                    • <b>구매 레버리지:</b> $\\Delta \\pi = \\Delta S_{\\text{T6}} = \\frac{\\Delta Y}{\\text{MarginRate}}$<br>
+                    (5% 이익률 시 구매 5천만 절감 = 매출 10억 효과)
+                </p>
+            </div>
+        </div>
+    </div>
+
     <!-- PART I -->
     <div class="section-title">
         <span>PART I.</span> 박개성 경영 분석 프레임워크 가이드 (Core Framework Guide)
