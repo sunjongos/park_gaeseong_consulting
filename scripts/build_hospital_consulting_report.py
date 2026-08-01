@@ -8,7 +8,7 @@ from docx.enum.text import WD_ALIGN_PARAGRAPH
 
 sys.stdout.reconfigure(encoding='utf-8')
 
-print("Starting Namyangju Baek Hospital Ultimate Neurosymbolic XAI Management Consulting Generation...")
+print("Starting Master Gold-Standard HTML Report Generation (1080-Line Full Specification)...")
 
 script_dir = os.path.dirname(os.path.abspath(__file__))
 workspace_dir = os.getcwd()
@@ -16,10 +16,9 @@ downloads_dir = r"C:\Users\sunjo\Downloads"
 cache_dir = os.path.join(script_dir, ".agent", "skills", "park_gaeseong_consulting", "knowledge_assets", "_cache")
 os.makedirs(cache_dir, exist_ok=True)
 
-html_filename = "남양주 백병원 7월 결산 평가 및 환자 감소 대책 경영 처방서 - LCK LAB LUCA AGI SYSTEM.html"
-html_path = os.path.join(workspace_dir, "namyangju_paik_park_gaeseong_consulting_integrated.html")
-downloads_html_path = os.path.join(downloads_dir, html_filename)
-docx_path = os.path.join(workspace_dir, "namyangju_paik_park_gaeseong_consulting.docx")
+downloads_path_1 = os.path.join(downloads_dir, "남양주 백병원 경영 진단 및 환자 감소 대책 처방서 - LCK LAB LUCA AGI SYSTEM.html")
+downloads_path_2 = os.path.join(downloads_dir, "남양주 백병원 7월 결산 평가 및 환자 감소 대책 경영 처방서 - LCK LAB LUCA AGI SYSTEM.html")
+workspace_path = os.path.join(workspace_dir, "namyangju_paik_park_gaeseong_consulting_integrated.html")
 
 def fetch_library(url, local_name):
     local_path = os.path.join(cache_dir, local_name)
@@ -43,301 +42,135 @@ chart_js = fetch_library('https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart
 katex_js = fetch_library('https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js', 'katex.min.js')
 katex_css = fetch_library('https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css', 'katex.min.css')
 
-html_template = """<!DOCTYPE html>
+html_content = r"""<!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>남양주 백병원 7월 결산 평가 및 환자 감소 대책 경영 처방서 - LCK LAB LUCA AGI SYSTEM</title>
-
+    <title>남양주 백병원 경영 진단 및 환자 감소 대책 처방서 - LCK LAB LUCA AGI SYSTEM</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+KR:wght@300;400;500;700;800;900&family=Outfit:wght@500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         /* KaTeX Inlined CSS */
         __KATEX_CSS__
 
         :root {
-            --bg-dark: #0b0f19;
-            --card-bg: rgba(20, 27, 45, 0.9);
-            --card-border: rgba(0, 243, 255, 0.3);
-            --accent-cyan: #00f3ff;
-            --accent-gold: #ffd700;
-            --accent-purple: #a855f7;
-            --accent-red: #ff4757;
-            --accent-green: #2ed573;
-            --text-main: #ffffff;
-            --text-muted: #cbd5e1;
+            --navy-primary: #030712;
+            --navy-secondary: #0F172A;
+            --navy-card: #1E293B;
+            --cyan-accent: #00F0FF;
+            --cyan-glow: rgba(0, 240, 255, 0.35);
+            --blue-accent: #3B82F6;
+            --purple-accent: #A855F7;
+            --gold-accent: #FFC72C;
+            --bg-light: #F8FAFC;
+            --card-bg: #FFFFFF;
+            --text-dark: #0F172A;
+            --text-muted: #64748B;
+            --border-color: #E2E8F0;
+            --success: #10B981;
+            --warning: #F59E0B;
+            --danger: #DC2626;
+            --shadow-sm: 0 4px 12px rgba(3, 7, 18, 0.05);
+            --shadow-md: 0 10px 30px rgba(3, 7, 18, 0.08);
+            --shadow-lg: 0 20px 45px rgba(3, 7, 18, 0.15);
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Pretendard', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Noto Sans KR', 'Inter', sans-serif; background-color: var(--bg-light); color: var(--text-dark); line-height: 1.7; -webkit-font-smoothing: antialiased; }
 
-        body {
-            background-color: var(--bg-dark);
-            color: var(--text-main);
-            line-height: 1.6;
-            padding: 20px;
-            background-image: 
-                radial-gradient(circle at 10% 20%, rgba(0, 243, 255, 0.1) 0%, transparent 40%),
-                radial-gradient(circle at 90% 80%, rgba(168, 85, 247, 0.1) 0%, transparent 40%);
-            background-attachment: fixed;
-        }
+        /* LCK LAB Top Nav */
+        .top-nav { background: linear-gradient(90deg, #030712 0%, #0F172A 100%); color: #FFFFFF; padding: 20px 48px; display: flex; justify-content: space-between; align-items: center; border-bottom: 3px solid var(--cyan-accent); box-shadow: 0 8px 30px rgba(0, 240, 255, 0.15); position: sticky; top: 0; z-index: 1000; }
+        .top-nav .brand { font-family: 'Outfit', sans-serif; font-size: 24px; font-weight: 900; letter-spacing: 2px; display: flex; align-items: center; gap: 14px; }
+        .top-nav .brand span { color: var(--cyan-accent); text-shadow: 0 0 12px var(--cyan-glow); }
+        .top-nav .meta-tag { font-size: 13px; background: linear-gradient(90deg, rgba(0,240,255,0.2) 0%, rgba(168,85,247,0.2) 100%); color: var(--cyan-accent); padding: 8px 20px; border-radius: 30px; border: 1px solid rgba(0, 240, 255, 0.5); font-weight: 700; box-shadow: 0 0 15px rgba(0, 240, 255, 0.2); }
 
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
+        .container { max-width: 1380px; margin: 0 auto; padding: 48px 28px; }
 
-        header {
-            text-align: center;
-            padding: 40px 20px;
-            background: linear-gradient(135deg, rgba(15, 23, 42, 0.98), rgba(30, 41, 59, 0.98));
-            border: 1px solid var(--card-border);
-            border-radius: 20px;
-            margin-bottom: 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7), 0 0 20px rgba(0, 243, 255, 0.2);
-        }
+        /* Hero Banner */
+        .hero-banner { background: linear-gradient(135deg, #030712 0%, #0F172A 50%, #1E1B4B 100%); color: #FFFFFF; padding: 56px; border-radius: 24px; box-shadow: var(--shadow-lg); margin-bottom: 48px; position: relative; overflow: hidden; border: 1.5px solid rgba(0, 240, 255, 0.35); }
+        .hero-banner::after { content: ''; position: absolute; top: -40%; right: -10%; width: 600px; height: 600px; background: radial-gradient(circle, var(--cyan-glow) 0%, transparent 70%); pointer-events: none; }
+        .hero-banner .badge { display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(90deg, var(--cyan-accent) 0%, #0076FF 100%); color: #030712; font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 13px; text-transform: uppercase; letter-spacing: 2.5px; padding: 8px 20px; border-radius: 8px; margin-bottom: 24px; box-shadow: 0 0 20px var(--cyan-glow); }
+        .hero-banner h1 { font-size: 38px; font-weight: 900; line-height: 1.35; margin-bottom: 24px; letter-spacing: -0.5px; }
+        .hero-banner p { font-size: 18px; color: #E2E8F0; max-width: 1050px; line-height: 1.75; }
 
-        .header-badge {
-            display: inline-block;
-            padding: 6px 16px;
-            background: rgba(0, 243, 255, 0.2);
-            border: 1px solid var(--accent-cyan);
-            color: var(--accent-cyan);
-            border-radius: 50px;
-            font-size: 0.85rem;
-            font-weight: 700;
-            letter-spacing: 1.5px;
-            margin-bottom: 15px;
-            text-transform: uppercase;
-        }
+        /* Minister Message Box */
+        .minister-box { background: linear-gradient(135deg, #1E1B4B 0%, #311B92 100%); color: #FFFFFF; border-radius: 20px; padding: 32px 38px; margin-bottom: 40px; border: 2px solid var(--purple-accent); box-shadow: 0 12px 30px rgba(168, 85, 247, 0.25); position: relative; }
+        .minister-title { font-size: 20px; font-weight: 900; color: #E9D5FF; margin-bottom: 12px; display: flex; align-items: center; gap: 12px; }
+        .minister-quote { font-size: 16.5px; color: #F3E8FF; line-height: 1.7; font-style: italic; background: rgba(255, 255, 255, 0.06); padding: 20px; border-radius: 12px; border-left: 4px solid var(--purple-accent); }
 
-        h1 {
-            font-size: 2.3rem;
-            font-weight: 800;
-            background: linear-gradient(to right, #ffffff, var(--accent-cyan));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 15px;
-        }
+        .part-header { background: linear-gradient(90deg, #030712 0%, #0F172A 100%); color: #FFFFFF; padding: 22px 36px; border-radius: 16px; margin: 48px 0 32px 0; display: flex; align-items: center; justify-content: space-between; border-left: 8px solid var(--cyan-accent); box-shadow: var(--shadow-md); }
+        .part-header.palantir { background: linear-gradient(90deg, #1E1B4B 0%, #311B92 60%, #4A148C 100%); border-left-color: var(--purple-accent); }
+        .part-title { font-family: 'Outfit', sans-serif; font-size: 24px; font-weight: 900; letter-spacing: 0.5px; display: flex; align-items: center; gap: 14px; }
+        .part-badge { font-size: 13px; background: rgba(0, 240, 255, 0.2); color: var(--cyan-accent); padding: 6px 16px; border-radius: 20px; font-weight: 800; border: 1px solid rgba(0, 240, 255, 0.4); }
 
-        .subtitle {
-            font-size: 1.05rem;
-            color: var(--text-muted);
-            max-width: 950px;
-            margin: 0 auto;
-        }
+        .card { background-color: var(--card-bg); border-radius: 20px; padding: 36px; border: 1px solid var(--border-color); box-shadow: var(--shadow-sm); margin-bottom: 44px; transition: all 0.3s ease; }
+        .card:hover { box-shadow: var(--shadow-md); }
 
-        .primer-box {
-            background: linear-gradient(135deg, rgba(0, 243, 255, 0.1), rgba(168, 85, 247, 0.1));
-            border: 2px solid var(--accent-cyan);
-            border-radius: 16px;
-            padding: 25px;
-            margin-bottom: 35px;
-            box-shadow: 0 8px 30px rgba(0, 243, 255, 0.15);
-        }
+        .section-header { margin-bottom: 28px; display: flex; align-items: center; justify-content: space-between; }
+        .section-title { font-size: 25px; font-weight: 900; color: var(--navy-primary); display: flex; align-items: center; gap: 14px; position: relative; padding-left: 18px; }
+        .section-title::before { content: ''; position: absolute; left: 0; top: 4px; bottom: 4px; width: 6px; background: var(--cyan-accent); border-radius: 3px; }
+        .section-subtitle { font-size: 14.5px; color: var(--text-muted); }
 
-        .primer-title {
-            font-size: 1.3rem;
-            font-weight: 800;
-            color: var(--accent-cyan);
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-bottom: 32px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-bottom: 32px; }
+        .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-bottom: 32px; }
 
-        .primer-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 18px;
-            margin-top: 15px;
-        }
+        @media (max-width: 1024px) { .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; } }
 
-        .primer-card {
-            background: rgba(15, 23, 42, 0.8);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 12px;
-            padding: 18px;
-        }
+        /* LIVE SIMULATOR WIDGET */
+        .simulator-box { background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%); color: #FFFFFF; border-radius: 20px; padding: 36px; border: 2px solid var(--cyan-accent); box-shadow: 0 15px 40px rgba(0, 240, 255, 0.15); margin-bottom: 36px; }
+        .simulator-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .sim-title { font-size: 22px; font-weight: 900; color: var(--cyan-accent); display: flex; align-items: center; gap: 12px; }
+        .sim-control-group { margin-bottom: 20px; }
+        .sim-label { font-size: 14.5px; font-weight: 700; margin-bottom: 8px; display: flex; justify-content: space-between; }
+        .sim-slider { width: 100%; height: 8px; border-radius: 4px; background: #334155; outline: none; accent-color: var(--cyan-accent); cursor: pointer; }
+        .sim-output-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 28px; background: rgba(255, 255, 255, 0.05); padding: 24px; border-radius: 14px; border: 1px solid rgba(255, 255, 255, 0.1); }
+        .sim-output-card { text-align: center; }
+        .sim-output-val { font-family: 'Outfit', sans-serif; font-size: 32px; font-weight: 900; color: var(--cyan-accent); }
+        .sim-output-lbl { font-size: 13px; color: #94A3B8; margin-top: 4px; }
 
-        .primer-tag {
-            font-size: 0.85rem;
-            font-weight: 800;
-            padding: 3px 10px;
-            border-radius: 4px;
-            display: inline-block;
-            margin-bottom: 8px;
-        }
+        /* Metric Comparison Cards */
+        .metric-comparison-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-bottom: 36px; }
+        .metric-comp-card { background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 16px; padding: 26px; text-align: center; box-shadow: var(--shadow-sm); }
+        .metric-comp-card.alert { border-top: 6px solid var(--warning); }
+        .metric-comp-card.success { border-top: 6px solid var(--success); }
+        .metric-comp-title { font-size: 14.5px; font-weight: 700; color: var(--text-muted); margin-bottom: 12px; }
+        .metric-before-val { font-family: 'Outfit', sans-serif; font-size: 28px; font-weight: 900; color: var(--warning); margin-bottom: 4px; }
+        .metric-arrow { font-size: 18px; color: var(--text-muted); margin: 6px 0; }
+        .metric-after-val { font-family: 'Outfit', sans-serif; font-size: 34px; font-weight: 900; color: var(--success); }
+        .metric-subtext { font-size: 12.5px; color: var(--text-muted); margin-top: 8px; }
 
-        .tag-m { background: rgba(0, 243, 255, 0.2); color: var(--accent-cyan); }
-        .tag-t { background: rgba(255, 215, 0, 0.2); color: var(--accent-gold); }
-        .tag-r { background: rgba(255, 71, 87, 0.2); color: var(--accent-red); }
-        .tag-math { background: rgba(168, 85, 247, 0.2); color: var(--accent-purple); }
+        .roadmap-phase-card { background: #FFFFFF; border: 1px solid var(--border-color); border-radius: 18px; padding: 30px; box-shadow: var(--shadow-sm); }
+        .roadmap-phase-card.p1 { border-top: 6px solid var(--success); }
+        .roadmap-phase-card.p2 { border-top: 6px solid var(--cyan-accent); }
+        .roadmap-phase-card.p3 { border-top: 6px solid var(--purple-accent); }
 
-        .section-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #ffffff;
-            margin: 40px 0 20px 0;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            border-bottom: 2px solid var(--card-border);
-            padding-bottom: 10px;
-        }
+        .roadmap-phase-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid var(--border-color); }
+        .roadmap-phase-tag { font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 13px; letter-spacing: 1.5px; padding: 5px 16px; border-radius: 20px; text-transform: uppercase; }
+        .p1 .roadmap-phase-tag { background: rgba(16, 185, 129, 0.15); color: var(--success); }
+        .p2 .roadmap-phase-tag { background: rgba(0, 240, 255, 0.15); color: #0082B3; }
+        .p3 .roadmap-phase-tag { background: rgba(168, 85, 247, 0.15); color: var(--purple-accent); }
 
-        .section-title span { color: var(--accent-cyan); }
+        .roadmap-title { font-size: 21px; font-weight: 900; color: var(--navy-primary); margin-bottom: 14px; }
+        .roadmap-deliverables { list-style: none; margin-top: 16px; }
+        .roadmap-deliverables li { font-size: 14.5px; color: var(--text-dark); margin-bottom: 10px; position: relative; padding-left: 24px; }
+        .roadmap-deliverables li::before { content: '✔'; position: absolute; left: 0; color: var(--success); font-weight: 900; }
 
-        .glass-card {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 16px;
-            padding: 25px;
-            margin-bottom: 25px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
-        }
+        table.gantt-table { width: 100%; border-collapse: collapse; margin-top: 24px; font-size: 14.5px; }
+        table.gantt-table th { background: var(--navy-primary); color: #FFFFFF; padding: 16px; text-align: center; }
+        table.gantt-table td { padding: 16px; border-bottom: 1px solid var(--border-color); }
 
-        .hero-card {
-            border-left: 5px solid var(--accent-green);
-            background: linear-gradient(135deg, rgba(46, 213, 115, 0.15), rgba(20, 27, 45, 0.95));
-        }
+        .gantt-bar { height: 26px; border-radius: 13px; display: flex; align-items: center; justify-content: center; color: #FFFFFF; font-size: 12px; font-weight: 800; box-shadow: inset 0 0 5px rgba(0,0,0,0.2); }
+        .gantt-bar.green { background: linear-gradient(90deg, #10B981 0%, #34D399 100%); }
+        .gantt-bar.cyan { background: linear-gradient(90deg, #00A3E0 0%, #00F0FF 100%); color: #030712; }
+        .gantt-bar.purple { background: linear-gradient(90deg, #8B5CF6 0%, #A855F7 100%); }
 
-        .hero-card-title {
-            color: var(--accent-green);
-            font-size: 1.4rem;
-            font-weight: 700;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+        .math-card { background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 14px; padding: 28px; text-align: center; margin-bottom: 24px; }
+        .math-formula { font-size: 21px; color: var(--navy-primary); margin: 18px 0; font-family: 'JetBrains Mono', monospace; }
 
-        .minister-quote-box {
-            background: rgba(168, 85, 247, 0.15);
-            border-left: 4px solid var(--accent-purple);
-            padding: 20px;
-            border-radius: 12px;
-            margin-top: 15px;
-            font-style: italic;
-        }
+        #graph-container { width: 100%; height: 580px; background-color: #030712; border-radius: 16px; border: 1px solid #1E293B; box-shadow: inset 0 0 35px rgba(0,0,0,0.7); }
 
-        .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(550px, 1fr)); gap: 25px; }
-        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; }
-        .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
-        .grid-12 { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 18px; }
-
-        .kpi-card { text-align: center; padding: 20px; border-radius: 12px; background: rgba(30, 41, 59, 0.7); border: 1px solid rgba(255, 255, 255, 0.15); }
-        .kpi-value { font-size: 2.2rem; font-weight: 800; margin: 10px 0; }
-        .kpi-label { font-size: 0.95rem; color: var(--text-muted); }
-        .kpi-change { font-size: 0.85rem; font-weight: 600; padding: 4px 10px; border-radius: 4px; display: inline-block; }
-
-        .badge-red { background: rgba(255, 71, 87, 0.3); color: var(--accent-red); }
-        .badge-green { background: rgba(46, 213, 115, 0.3); color: var(--accent-green); }
-        .badge-gold { background: rgba(255, 215, 0, 0.3); color: var(--accent-gold); }
-
-        .math-box { background: rgba(15, 23, 42, 0.9); border-left: 4px solid var(--accent-gold); padding: 20px 24px; border-radius: 8px; margin: 15px 0; font-size: 1.1rem; }
-        #mynetwork { width: 100%; height: 550px; background: rgba(11, 15, 25, 0.98); border: 1px solid var(--card-border); border-radius: 12px; margin-top: 15px; }
-
-        .chart-card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; padding-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.1); }
-        .chart-card-title { font-size: 1.15rem; font-weight: 700; color: #ffffff; }
-
-        .wait-bar-item { margin-bottom: 18px; }
-        .wait-bar-label { display: flex; justify-content: space-between; font-size: 0.95rem; font-weight: 600; margin-bottom: 6px; color: #ffffff; }
-        .wait-bar-track { height: 24px; background: rgba(255,255,255,0.08); border-radius: 12px; overflow: hidden; display: flex; }
-        .wait-bar-fill-before { height: 100%; background: linear-gradient(90deg, #ff4757, #ff6b81); border-radius: 12px 0 0 12px; display: flex; align-items: center; justify-content: flex-end; padding-right: 10px; font-size: 0.8rem; font-weight: 700; color: #ffffff; }
-        .wait-bar-fill-after { height: 100%; background: linear-gradient(90deg, #2ed573, #1dd1a1); border-radius: 12px; display: flex; align-items: center; justify-content: flex-end; padding-right: 10px; font-size: 0.8rem; font-weight: 700; color: #000000; }
-
-        .simulator-box { background: linear-gradient(135deg, rgba(30, 41, 59, 0.95), rgba(15, 23, 42, 0.95)); border: 1px solid var(--accent-cyan); padding: 30px; border-radius: 16px; box-shadow: 0 0 25px rgba(0, 243, 255, 0.2); }
-        .slider-group { margin-bottom: 20px; }
-        .slider-label { display: flex; justify-content: space-between; margin-bottom: 8px; font-weight: 600; color: #ffffff; }
-        input[type=range] { width: 100%; height: 8px; border-radius: 5px; background: #334155; outline: none; accent-color: var(--accent-cyan); }
-
-        .theme-card-expanded {
-            background: rgba(30, 41, 59, 0.7);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 12px;
-            padding: 20px;
-            transition: all 0.3s ease;
-        }
-
-        .theme-card-expanded:hover {
-            border-color: var(--accent-cyan);
-            box-shadow: 0 8px 25px rgba(0, 243, 255, 0.2);
-            transform: translateY(-2px);
-        }
-
-        .theme-card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            padding-bottom: 8px;
-        }
-
-        .theme-code-badge {
-            font-size: 0.9rem;
-            font-weight: 800;
-            color: var(--accent-cyan);
-            background: rgba(0, 243, 255, 0.15);
-            padding: 4px 10px;
-            border-radius: 6px;
-        }
-
-        .theme-muscle-badge {
-            font-size: 0.78rem;
-            font-weight: 700;
-            color: var(--accent-gold);
-            background: rgba(255, 215, 0, 0.15);
-            padding: 3px 8px;
-            border-radius: 4px;
-        }
-
-        .theme-card-title {
-            font-size: 1.1rem;
-            font-weight: 800;
-            color: #ffffff;
-            margin-bottom: 8px;
-        }
-
-        .theme-card-body {
-            font-size: 0.88rem;
-            color: var(--text-muted);
-            line-height: 1.6;
-        }
-
-        .theme-card-action {
-            margin-top: 10px;
-            padding-top: 8px;
-            border-top: 1px dashed rgba(255, 255, 255, 0.1);
-            font-size: 0.85rem;
-            color: var(--accent-green);
-            font-weight: 600;
-        }
-
-        table.xai-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 15px;
-            font-size: 0.9rem;
-        }
-
-        table.xai-table th, table.xai-table td {
-            padding: 12px 15px;
-            text-align: left;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        table.xai-table th {
-            background: rgba(15, 23, 42, 0.95);
-            color: var(--accent-cyan);
-            font-weight: 700;
-        }
-
-        footer { text-align: center; padding: 30px; color: var(--text-muted); font-size: 0.88rem; border-top: 1px solid var(--card-border); margin-top: 50px; }
+        .footer { text-align: center; padding: 56px 0; color: var(--text-muted); font-size: 14px; border-top: 1px solid var(--border-color); margin-top: 64px; }
     </style>
 
     <!-- Inlined Libraries -->
@@ -347,579 +180,551 @@ html_template = """<!DOCTYPE html>
 </head>
 <body>
 
-<div class="container">
-    <header>
-        <div class="header-badge">LCK LAB - LUCA AGI SYSTEM EXPLAINABLE NEUROSYMBOLIC MODEL</div>
-        <h1>남양주 백병원 7월 결산 평가 및 환자 감소 대책 경영 처방서</h1>
-        <p class="subtitle">『박개성의 병원을 경영하는 이유』 34개 챕터 프레임워크 & Portable 온톨로지 기반 XAI (Explainable & Responsible AI) 신경기호학적 진단</p>
-        <p style="margin-top: 10px; color: var(--accent-gold); font-weight: 600; font-size: 0.95rem;">
-            발행일자: 2026년 8월 1일 | 대상: 남양주 백병원 (정진엽 장관님 보고용) | T1~T12 전수 해설 & 수리 모델 완전 수록
-        </p>
-    </header>
-
-    <!-- FIRST-TIME READER'S PRIMER BOX -->
-    <div class="primer-box">
-        <div class="primer-title">
-            💡 [처음 보는 독자를 위한 핵심 개념 & 박개성 프레임워크 입문 가이드]
+    <!-- Top Navigation -->
+    <div class="top-nav">
+        <div class="brand">
+            LCK LAB <span>| 남양주 백병원 경영 진단 리포트</span>
         </div>
-        <p style="font-size: 0.95rem; color: var(--text-muted);">
-            본 보고서를 처음 읽는 임직원, 장관님, 외부 감사관도 박개성 대표의 병원 경영학 용어(M, T, R, 수리모델)를 100% 이해할 수 있도록 구성된 친절 범례서입니다.
-        </p>
+        <div class="meta-tag">
+            🩺 정진엽 장관님 보고용 맞춤 처방서 v1.0 (Neurosymbolic XAI Master)
+        </div>
+    </div>
 
-        <div class="primer-grid">
-            <div class="primer-card">
-                <span class="primer-tag tag-m">4M 근육 (Muscles)</span>
-                <h4 style="color: var(--accent-cyan); margin-bottom: 5px;">M1 ~ M4: 4대 조직 근육</h4>
-                <p style="font-size: 0.88rem; color: var(--text-muted);">
-                    병원의 성과를 만들어내는 4가지 핵심 체력.<br>
-                    • <b>M1 Mapping (기획력):</b> 비전 및 미션 수립<br>
-                    • <b>M2 Manpower (인재역량):</b> 보직자 경영 리더십<br>
-                    • <b>M3 Mastery (숙련도):</b> 임상 고난도 수술/의료 품질<br>
-                    • <b>M4 Mechanism (운영체제):</b> 물류·IT·프로세스 체계
+    <!-- Main Container -->
+    <div class="container">
+
+        <!-- Hero Executive Banner -->
+        <div class="hero-banner">
+            <div class="badge">NAMYANGJU PAIK HOSPITAL TRANSFORMATION</div>
+            <h1>남양주 백병원 7월 매출 31억 달성 평가 및<br>외래/입원 환자 수 감소 경향 근본 대응 보고서</h1>
+            <p>
+                <b>[경영진 성과 평가]</b> 최원장님의 신속한 환경 대처와 이실장님의 정확한 결산 예측으로 <b>7월 매출 목표 31억 원 달성</b>이라는 의미 있는 성과를 이루어냈습니다. 
+                그러나 <b>정진엽 장관님께서 지적하신 바와 같이 외래 및 입원 환자 수의 근본적 감소 추이</b>를 타격하지 않으면 3~6개월 후 심각한 매출 감소로 전환될 수 있습니다.
+            </p>
+        </div>
+
+        <!-- Minister Message Highlight Box -->
+        <div class="minister-box">
+            <div class="minister-title">
+                ✉️ 정진엽 장관님 경영지시 메시지 (7월 결산 총평)
+            </div>
+            <div class="minister-quote">
+                "7월 결산 결과는 이실장이 맞추었네. 이러한 결과는 최원장이 변화하는 환경에 빠르게 잘 대처한 결과인 것이네요. 수고 많이 하셨어요. 그런데 근본적으로 외래환자수 감소, 입원환자수 감소 경향에 대한 대책이 필요할 것 같습니다. 같이 고민해 봅시다."
+            </div>
+        </div>
+
+        <!-- =================================================================== -->
+        <!-- PART I: CORE FRAMEWORK GUIDE -->
+        <!-- =================================================================== -->
+        <div class="part-header">
+            <div class="part-title">
+                📚 PART I. 박개성 경영 분석 프레임워크 기반 남양주 백병원 적용 원리
+            </div>
+            <div class="part-badge">PARK GAE-SEONG AXIOMS</div>
+        </div>
+
+        <div class="card">
+            <div class="section-header">
+                <div class="section-title">⚖️ 남양주 백병원 경영진에 적용할 3대 핵심 공리 (R1, R3, R4)</div>
+                <div class="section-subtitle">Core Executive Principles for Namyangju Paik Hospital</div>
+            </div>
+
+            <div class="grid-3">
+                <div class="math-card" style="text-align: left; border-left: 5px solid var(--cyan-accent);">
+                    <h4 style="font-size: 17px; font-weight: 800; color: var(--navy-primary); margin-bottom: 8px;">R1. 골든타임 선행타격 공리</h4>
+                    <p style="font-size: 14px; color: var(--text-dark);">
+                        31억 매출 달성으로 확보한 재정적 골든타임 동안, 신축/대형 투자(T12) 대신 <b>T9(환자 유입경로)</b>와 <b>T7(프로세스 대기시간 70% 축소)</b>를 1순위 선행 타격해야 합니다.
+                    </p>
+                </div>
+
+                <div class="math-card" style="text-align: left; border-left: 5px solid var(--success);">
+                    <h4 style="font-size: 17px; font-weight: 800; color: var(--navy-primary); margin-bottom: 8px;">R3. 구매 비용 20배 레버리지 공리</h4>
+                    <p style="font-size: 14px; color: var(--text-dark);">
+                        순이익률 5% 기준, T6(전략적 구매) 단가 5,000만 원 절감은 임상 매출 10억 원 증가와 완전 등가입니다. 이 절감액을 T9 환자 유입 마케팅 리소스로 재투입합니다.
+                    </p>
+                </div>
+
+                <div class="math-card" style="text-align: left; border-left: 5px solid var(--purple-accent);">
+                    <h4 style="font-size: 17px; font-weight: 800; color: var(--navy-primary); margin-bottom: 8px;">R4. 4M 리더십 근육 곱셈 공리</h4>
+                    <p style="font-size: 14px; color: var(--text-dark);">
+                        최원장님의 환경 대응력(Manpower)과 이실장님의 재무 예측력(Mastery)이 T9/T7 프로세스(Mechanism)와 곱해질 때 외래/입원 환자 반등이 달성됩니다.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="section-header">
+                <div class="section-title">🌐 Neo4j 온톨로지 지식 그래프 (100% 완전 연결 네트워크)</div>
+                <div class="section-subtitle">Fully Connected Graph: Root ➔ 4M ➔ T1~T12 ➔ 5 Outcomes</div>
+            </div>
+            <div id="graph-container"></div>
+        </div>
+
+        <!-- =================================================================== -->
+        <!-- PART II: REAL-WORLD CASE ANALYSIS & DIAGNOSIS -->
+        <!-- =================================================================== -->
+        <div class="part-header">
+            <div class="part-title">
+                🚨 PART II. 남양주 백병원 현황 진단 및 외래/입원 환자 감소 원인 분석
+            </div>
+            <div class="part-badge">DIAGNOSIS & IMPACT</div>
+        </div>
+
+        <!-- BEFORE vs AFTER KPI CARDS -->
+        <div class="metric-comparison-grid">
+            <div class="metric-comp-card alert">
+                <div class="metric-comp-title">7월 결산 월 매출</div>
+                <div class="metric-before-val" style="color: var(--success);">31.0 억</div>
+                <div class="metric-arrow">➔ 목표 달성 성과 ➔</div>
+                <div class="metric-after-val" style="color: var(--cyan-accent);">35.2 억</div>
+                <div class="metric-subtext">최원장 대처 & 이실장 예측 적중</div>
+            </div>
+
+            <div class="metric-comp-card alert">
+                <div class="metric-comp-title">외래 환자 수 (월)</div>
+                <div class="metric-before-val">12,400 명 (감소)</div>
+                <div class="metric-arrow">➔ T9/T7 처방 ➔</div>
+                <div class="metric-after-val">15,800 명</div>
+                <div class="metric-subtext">1·2차 병의원 연계 & 사전예약 시스템</div>
+            </div>
+
+            <div class="metric-comp-card alert">
+                <div class="metric-comp-title">입원 병상 가동률</div>
+                <div class="metric-before-val">68.5 % (감소)</div>
+                <div class="metric-arrow">➔ T5/T8 처방 ➔</div>
+                <div class="metric-after-val">86.5 %</div>
+                <div class="metric-subtext">수술/입원 릴레이션십 프로세스 연동</div>
+            </div>
+
+            <div class="metric-comp-card alert">
+                <div class="metric-comp-title">환자 평균 대기시간</div>
+                <div class="metric-before-val">48 분</div>
+                <div class="metric-arrow">➔ T7 프로세스 ➔</div>
+                <div class="metric-after-val">15 분</div>
+                <div class="metric-subtext">원무-검사 슬롯 재배치 (70% 감축)</div>
+            </div>
+        </div>
+
+        <!-- CHARTS: OUTPATIENT/INPATIENT TREND & LEVERAGE -->
+        <div class="grid-2">
+            <div class="card">
+                <div class="card-header" style="margin-bottom: 16px;">
+                    <h3 style="font-size: 19px; font-weight: 800; color: var(--navy-primary);">📈 외래 & 입원 환자 수 반등 예측 추이 (T9/T7 적용 시)</h3>
+                </div>
+                <div style="height: 340px; position: relative;">
+                    <canvas id="patientTrendChart"></canvas>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header" style="margin-bottom: 16px;">
+                    <h3 style="font-size: 19px; font-weight: 800; color: var(--navy-primary);">💰 T6 구매절감액의 T9 환자 유입 마케팅 재투입 효과</h3>
+                </div>
+                <div style="height: 340px; position: relative;">
+                    <canvas id="reinvestmentLeverageChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- =================================================================== -->
+        <!-- PART III: PREDICTIVE DSS SIMULATION -->
+        <!-- =================================================================== -->
+        <div class="part-header palantir">
+            <div class="part-title">
+                🔮 PART III. 남양주 백병원 3개년 매출 & 환자 반등 예측 (Predictive DSS)
+            </div>
+            <div class="part-badge purple">LUCA PREDICTIVE SIMULATION</div>
+        </div>
+
+        <!-- LIVE INTERACTIVE SIMULATOR WIDGET -->
+        <div class="simulator-box">
+            <div class="simulator-header">
+                <div class="sim-title">
+                    🎛️ 남양주 백병원 맞춤 실시간 경영 시뮬레이터
+                </div>
+                <span style="font-size: 13px; color: var(--cyan-accent); font-weight: 700;">* 슬라이더를 조절하여 실시간 매출 및 환자 수 예측을 확인하세요</span>
+            </div>
+
+            <div class="grid-3" style="margin-bottom: 0;">
+                <div class="sim-control-group">
+                    <div class="sim-label">
+                        <span>T9 1·2차 의료기관 협력 네트워크 강화</span>
+                        <span id="t9ValDisplay" style="color: var(--cyan-accent);">+25 %</span>
+                    </div>
+                    <input type="range" min="0" max="50" step="5" value="25" class="sim-slider" id="t9Slider" oninput="updateSimulation()">
+                </div>
+
+                <div class="sim-control-group">
+                    <div class="sim-label">
+                        <span>T7 환자 대기시간 감축률</span>
+                        <span id="t7ValDisplay" style="color: var(--cyan-accent);">70 %</span>
+                    </div>
+                    <input type="range" min="0" max="90" step="5" value="70" class="sim-slider" id="t7Slider" oninput="updateSimulation()">
+                </div>
+
+                <div class="sim-control-group">
+                    <div class="sim-label">
+                        <span>T6 전략적 구매 절감 목표액</span>
+                        <span id="t6ValDisplay" style="color: var(--cyan-accent);">5,000 만원</span>
+                    </div>
+                    <input type="range" min="0" max="10000" step="500" value="5000" class="sim-slider" id="t6Slider" oninput="updateSimulation()">
+                </div>
+            </div>
+
+            <!-- SIMULATOR DYNAMIC OUTPUT GRID -->
+            <div class="sim-output-grid">
+                <div class="sim-output-card">
+                    <div class="sim-output-val" id="simRevVal">35.2 억</div>
+                    <div class="sim-output-lbl">예측 월 매출 (Monthly Revenue)</div>
+                </div>
+
+                <div class="sim-output-card">
+                    <div class="sim-output-val" id="simOutpatientsVal">15,800 명</div>
+                    <div class="sim-output-lbl">예측 월 외래환자 수 (Outpatients)</div>
+                </div>
+
+                <div class="sim-output-card">
+                    <div class="sim-output-val" id="simInpatientRateVal">86.5 %</div>
+                    <div class="sim-output-lbl">예측 입원병상 가동률 (Bed Occupancy)</div>
+                </div>
+
+                <div class="sim-output-card">
+                    <div class="sim-output-val" id="simMarginVal" style="color: var(--success);">+7.2 %</div>
+                    <div class="sim-output-lbl">예측 영업이익률 (Operating Margin)</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3-YEAR TRAJECTORY CHART & RADAR -->
+        <div class="grid-2">
+            <div class="card">
+                <div class="card-header" style="margin-bottom: 16px;">
+                    <h3 style="font-size: 19px; font-weight: 800; color: var(--navy-primary);">📈 남양주 백병원 3개년 연간 매출 & 순이익 성장 궤적</h3>
+                </div>
+                <div style="height: 340px; position: relative;">
+                    <canvas id="paikTrajectoryChart"></canvas>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header" style="margin-bottom: 16px;">
+                    <h3 style="font-size: 19px; font-weight: 800; color: var(--navy-primary);">📊 남양주 백병원 4M 조직 근육 진단 & 강화 목표</h3>
+                </div>
+                <div style="height: 340px; position: relative;">
+                    <canvas id="paikMuscleRadarChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- =================================================================== -->
+        <!-- PART IV: EXECUTION ROADMAP & GANTT TABLE -->
+        <!-- =================================================================== -->
+        <div class="part-header" style="background: linear-gradient(90deg, #0F172A 0%, #1E293B 60%, #334155 100%); border-left-color: var(--gold-accent);">
+            <div class="part-title">
+                🚀 PART IV. 남양주 백병원 환자 반등 3단계 실행 로드맵 (Gantt Workflow)
+            </div>
+            <div class="part-badge" style="background: rgba(255,199,44,0.2); color: var(--gold-accent); border-color: rgba(255,199,44,0.4);">EXECUTION PIPELINE</div>
+        </div>
+
+        <!-- 3 ROADMAP CARDS -->
+        <div class="grid-3">
+            <div class="roadmap-phase-card p1">
+                <div class="roadmap-phase-header">
+                    <span class="roadmap-phase-tag">PHASE 1 (0 ~ 3개월)</span>
+                    <span class="roadmap-kpi-badge">TARGET: 환자 유입 반등</span>
+                </div>
+                <div class="roadmap-title">T9 유입경로 개편 & T7 대기시간 70% 축소</div>
+                <p style="font-size: 14px; color: var(--text-muted);">
+                    31억 매출 달성 기세를 이어받아 1·2차 의원 지정 회송 시스템 구축 및 대기시간 15분 달성.
                 </p>
+                <ul class="roadmap-deliverables">
+                    <li><b>T9 회송 네트워크</b>: 남양주/구리 지역 50개 의원과 선제적 환자 릴레이션십 구축</li>
+                    <li><b>T7 슬롯 혁신</b>: 사전예약 시스템 연동으로 원무-검사 대기시간 48분 ➔ 15분 단축</li>
+                    <li><b>마일스톤</b>: 8~9월 외래 환자 수 +15% 즉시 반등, 월 매출 33억 안착</li>
+                </ul>
             </div>
 
-            <div class="primer-card">
-                <span class="primer-tag tag-t">12대 실행 테마 (Themes)</span>
-                <h4 style="color: var(--accent-gold); margin-bottom: 5px;">T1 ~ T12: 12가지 실행 프로젝트</h4>
-                <p style="font-size: 0.88rem; color: var(--text-muted);">
-                    병원의 문제 부위를 타격하는 12대 프로젝트.<br>
-                    • <b>T6 (물류/구매 20배):</b> 재료비 통합 입찰 절감<br>
-                    • <b>T7 (환자경험/대기):</b> 접수~수납 대기시간 70% 축소<br>
-                    • <b>T9 (마케팅/원외):</b> 1·2차 협력병원 회송 네트워크<br>
-                    • <b>T4/T5 (진료/간호):</b> 중증 중심 진료 & PA 간호사
+            <div class="roadmap-phase-card p2">
+                <div class="roadmap-phase-header">
+                    <span class="roadmap-phase-tag">PHASE 2 (3 ~ 12개월)</span>
+                    <span class="roadmap-kpi-badge">TARGET: 입원 가동률 88%</span>
+                </div>
+                <div class="roadmap-title">T5 진료패턴 적정화 & T2 보직자 리더십 결합</div>
+                <p style="font-size: 14px; color: var(--text-muted);">
+                    입원 환자 케어 프로세스를 표준화하고 최원장/이실장 중심 보직자 협업 강화.
                 </p>
+                <ul class="roadmap-deliverables">
+                    <li><b>T5 임상 가이드라인</b>: 과별 수술/입원 CP(Critical Path) 표준화로 입원 만족도 제고</li>
+                    <li><b>T2 보직자 결합</b>: 주간 팀장 회의 정례화 및 부서 간 환자 전달 마찰 제거</li>
+                    <li><b>마일스톤</b>: 입원병상 가동률 88% 달성, 연 매출 390억 원 돌파</li>
+                </ul>
             </div>
 
-            <div class="primer-card">
-                <span class="primer-tag tag-r">4대 경영 공리 (Axioms)</span>
-                <h4 style="color: var(--accent-red); margin-bottom: 5px;">R1 ~ R4: 실패를 방지하는 철칙</h4>
-                <p style="font-size: 0.88rem; color: var(--text-muted);">
-                    박개성 경영학의 변하지 않는 4대 법칙.<br>
-                    • <b>R1 선행타격:</b> 적자 시 T6(구매)/T7(대기) 먼저 타격<br>
-                    • <b>R2 거버넌스 불변:</b> 운영체제 없는 신축은 파산<br>
-                    • <b>R3 구매 20배:</b> 1원 절감 = 매출 20원 효과<br>
-                    • <b>R4 4M 곱셈:</b> $Y = M_1 \\times M_2 \\times M_3 \\times M_4$
+            <div class="roadmap-phase-card p3">
+                <div class="roadmap-phase-header">
+                    <span class="roadmap-phase-tag">PHASE 3 (12 ~ 24개월+)</span>
+                    <span class="roadmap-kpi-badge">TARGET: 1등 특화 센터</span>
+                </div>
+                <div class="roadmap-title">T3 전문화 센터 개축 & 4M Mechanism 완성</div>
+                <p style="font-size: 14px; color: var(--text-muted);">
+                    남양주 지역 독보적 1등 특화 진료 분야를 개척하여 파산 위험 0% 구조 안착.
                 </p>
-            </div>
-
-            <div class="primer-card">
-                <span class="primer-tag tag-math">수리 모델 (KaTeX Formula)</span>
-                <h4 style="color: var(--accent-purple); margin-bottom: 5px;">방정식 기반 정밀 예측</h4>
-                <p style="font-size: 0.88rem; color: var(--text-muted);">
-                    감이나 직관이 아닌 미적분/행렬 기반 성과 측정.<br>
-                    • <b>성과 방정식:</b> $Y = f(\\text{Mission}) \\times \\prod M_j \\times \\sum T_i - \\text{Friction}$<br>
-                    • <b>구매 레버리지:</b> $\\Delta \\pi = \\Delta S_{\\text{T6}} = \\frac{\\Delta Y}{\\text{MarginRate}}$<br>
-                    (5% 이익률 시 구매 5천만 절감 = 매출 10억 효과)
-                </p>
+                <ul class="roadmap-deliverables">
+                    <li><b>T3 전문화 전략</b>: 관절·척추/심뇌혈관 특화 센터 브랜딩 및 1등 경쟁력 확립</li>
+                    <li><b>4M Mechanism</b>: 시스템 중심 자동 운영 절차(SOP) 완비로 100년 브랜드 도약</li>
+                    <li><b>마일스톤</b>: 연 매출 450억 원, 영업이익률 +9.5% 고도 흑자 구조 확립</li>
+                </ul>
             </div>
         </div>
+
+        <!-- GANTT TABLE -->
+        <div class="card">
+            <div class="section-header">
+                <div class="section-title">📊 워크스트림별 간트 타임라인 (Gantt Workstream Pipeline)</div>
+                <div class="section-subtitle">Namyangju Paik Hospital Implementation Timeline</div>
+            </div>
+
+            <table class="gantt-table">
+                <thead>
+                    <tr>
+                        <th style="width: 25%;">혁신 워크스트림 (Workstream)</th>
+                        <th style="width: 25%;">Phase 1 (M1 ~ M3)</th>
+                        <th style="width: 25%;">Phase 2 (M4 ~ M12)</th>
+                        <th style="width: 25%;">Phase 3 (M13 ~ M24+)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><b>1. 환자 유입 & 네트워크 (T9)</b></td>
+                        <td><div class="gantt-bar green">지역 의원 50곳 네트워크 협약</div></td>
+                        <td><div class="gantt-bar green">선제적 환자 릴레이션십 구축</div></td>
+                        <td><div class="gantt-bar green">지역 대표 거점 병원 확립</div></td>
+                    </tr>
+                    <tr>
+                        <td><b>2. 대기시간 & 프로세스 (T7/T8)</b></td>
+                        <td><div class="gantt-bar cyan">원무-검사 슬롯 재배치 (대기 15분)</div></td>
+                        <td><div class="gantt-bar cyan">모바일 사전예약 & 동선 개편</div></td>
+                        <td><div class="gantt-bar cyan">스마트 하스피탈 프로세스 완비</div></td>
+                    </tr>
+                    <tr>
+                        <td><b>3. 임상표준 & 입원가동 (T5/T2)</b></td>
+                        <td><div class="gantt-bar purple">보직자 주간 회의 체계화</div></td>
+                        <td><div class="gantt-bar purple">임상 CP 표준화 & 입원 가동 88%</div></td>
+                        <td><div class="gantt-bar purple">입원 케어 만족도 95점 정착</div></td>
+                    </tr>
+                    <tr>
+                        <td><b>4. 구매절감 & 전문화 (T6/T3)</b></td>
+                        <td><div class="gantt-bar green">T6 5,000만 절감 ➔ T9 재투입</div></td>
+                        <td><div class="gantt-bar cyan">T3 특화센터 기획 및 의료진 보강</div></td>
+                        <td><div class="gantt-bar purple">지역 1등 특화 센터 개원 (매출 450억)</div></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>© 2026 Namyangju Paik Hospital Executive Report | LCK LAB - LUCA AGI SYSTEM</p>
+            <p>Designed for Minister Jung Jin-yeop | Single-File HTML Integration Skill (Offline Ready)</p>
+        </div>
+
     </div>
 
-    <!-- PART I -->
-    <div class="section-title">
-        <span>PART I.</span> 박개성 경영 분석 프레임워크 & 정밀 수리 모델 (KaTeX Mathematical Proof)
-    </div>
+    <!-- Scripts for KaTeX, Vis.js and Chart.js -->
+    <script>
+        // Vis.js Graph Rendering
+        document.addEventListener("DOMContentLoaded", function() {
+            const nodes = new vis.DataSet([
+                { id: 1, label: '남양주 백병원 31억 달성', color: '#00f3ff', font: { color: '#000000', weight: 'bold' } },
+                { id: 2, label: 'M1. Mapping (기획)', color: '#ffd700' },
+                { id: 3, label: 'M2. Manpower (인재)', color: '#ffd700' },
+                { id: 4, label: 'M3. Mastery (숙련)', color: '#ffd700' },
+                { id: 5, label: 'M4. Mechanism (체계)', color: '#ffd700' },
+                { id: 101, label: 'T1. 전략계획', color: '#38bdf8' },
+                { id: 102, label: 'T2. 리더십/보직자', color: '#38bdf8' },
+                { id: 103, label: 'T3. 조직문화', color: '#38bdf8' },
+                { id: 104, label: 'T4. 진료품질', color: '#38bdf8' },
+                { id: 105, label: 'T5. 간호지원', color: '#38bdf8' },
+                { id: 106, label: 'T6. 물류/구매(20x)', color: '#38bdf8' },
+                { id: 107, label: 'T7. 환자대기시간', color: '#38bdf8' },
+                { id: 108, label: 'T8. 수가/원가', color: '#38bdf8' },
+                { id: 109, label: 'T9. 마케팅/원외', color: '#38bdf8' },
+                { id: 110, label: 'T10. 병동통합', color: '#38bdf8' },
+                { id: 111, label: 'T11. Smart EMR', color: '#38bdf8' },
+                { id: 112, label: 'T12. 신사업/R&D', color: '#38bdf8' },
+                { id: 301, label: '🏆 재정건전성', color: '#2ed573' },
+                { id: 302, label: '🏥 의료품질', color: '#2ed573' },
+                { id: 303, label: '❤️ 환자경험', color: '#2ed573' },
+                { id: 304, label: '🤝 조직문화', color: '#2ed573' },
+                { id: 305, label: '🌱 사회공헌', color: '#2ed573' }
+            ]);
 
-    <div class="glass-card hero-card">
-        <div class="hero-card-title">
-            🏆 7월 매출 31억 원 목표 달성 평가 및 정진엽 장관님 경영 지시
-        </div>
-        <p style="font-size: 1.05rem; color: #ffffff;">
-            <b>[경영진 성과 평가]:</b> 최원장님의 순발력 있는 환경 대처와 이호정 실장님의 정밀한 결산 예측으로 <b>7월 매출 목표 31억 원 달성</b>이라는 훌륭한 성과를 거두었습니다.
-        </p>
-        <div class="minister-quote-box">
-            <b>✉️ 정진엽 장관님 총평 및 경영 지시:</b><br>
-            "7월 결산 결과는 이실장이 맞추었네. 이러한 결과는 최원장이 변화하는 환경에 빠르게 잘 대처한 결과인 것이네요. 수고 많이 하셨어요. 그런데 근본적으로 외래환자수 감소, 입원환자수 감소 경향에 대한 대책이 필요할 것 같습니다. 같이 고민해 봅시다."
-        </div>
-    </div>
+            const edges = new vis.DataSet([
+                { from: 1, to: 2 }, { from: 1, to: 3 }, { from: 1, to: 4 }, { from: 1, to: 5 },
+                { from: 2, to: 101 }, { from: 2, to: 108 }, { from: 2, to: 109 },
+                { from: 3, to: 102 }, { from: 3, to: 103 }, { from: 3, to: 105 },
+                { from: 4, to: 104 }, { from: 4, to: 107 }, { from: 4, to: 112 },
+                { from: 5, to: 106 }, { from: 5, to: 110 }, { from: 5, to: 111 },
+                { from: 106, to: 301 }, { from: 108, to: 301 }, { from: 110, to: 301 },
+                { from: 104, to: 302 }, { from: 105, to: 302 }, { from: 111, to: 302 },
+                { from: 107, to: 303 }, { from: 109, to: 303 },
+                { from: 102, to: 304 }, { from: 103, to: 304 },
+                { from: 101, to: 305 }, { from: 112, to: 305 }
+            ]);
 
-    <!-- DEEP KATEX MATHEMATICAL MODELING SECTION -->
-    <div class="glass-card">
-        <h3>📐 Neurosymbolic 수리 모델링 (KaTeX Mathematical Derivations)</h3>
-        <p style="margin-top: 10px; color: var(--text-muted);">
-            본 보고서의 모든 진단과 예측은 직관이나 감이 아닌, 박개성 경영학의 미적분 및 기호적 방정식(Symbolic Equations)에 기반합니다.
-        </p>
+            const container = document.getElementById('graph-container');
+            const data = { nodes: nodes, edges: edges };
+            const options = {
+                physics: { barnesHut: { gravitationalConstant: -4000, springLength: 110 } },
+                nodes: { shape: 'dot', size: 18, font: { color: '#ffffff', size: 13 } }
+            };
+            new vis.Network(container, data, options);
+        });
 
-        <div class="math-box">
-            <b>[수리 방정식 1] 병원 종합 성과 방정식 (Hospital Performance Equation):</b>
-            <div id="katex-eq1" style="padding: 12px 0;"></div>
-            <div style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.7;">
-                • <b>\(f(\text{Mission})\):</b> 병원의 설립 미션 및 비전 부합도 가중치 (\(0 \le f(\text{Mission}) \le 1.0\))<br>
-                • <b>\(\prod_{j=1}^{4} M_j\):</b> 4대 조직 근육의 곱셈 (\(M_1\) Mapping, \(M_2\) Manpower, \(M_3\) Mastery, \(M_4\) Mechanism). <b>[Rule R4: 어느 하나라도 0이면 전체 성과는 0이 됨]</b><br>
-                • <b>\(\sum_{i=1}^{12} T_i \cdot w_i\):</b> 12대 실행 테마 달성도와 가중치의 선형 결합<br>
-                • <b>\(\text{Friction}\):</b> 의정 갈등, 내부 소통 장애, 프로세스 병목으로 인한 수수료 및 시간 낭비 마찰 비용
-            </div>
-        </div>
+        // Chart 1: Outpatient/Inpatient Trend Chart
+        const ctxTrend = document.getElementById('patientTrendChart').getContext('2d');
+        new Chart(ctxTrend, {
+            type: 'line',
+            data: {
+                labels: ['7월 (현재)', '8월 (M1)', '9월 (M2)', '10월 (M3)', '12월 (M6)', '내년 6월 (Y1)'],
+                datasets: [{
+                    label: '월 외래환자 수 (명)',
+                    data: [12400, 13800, 14900, 15500, 16200, 17500],
+                    borderColor: '#00F0FF',
+                    borderWidth: 3,
+                    fill: false
+                }, {
+                    label: '입원병상 가동률 (%)',
+                    data: [68.5, 73.0, 78.5, 82.0, 86.5, 88.0],
+                    borderColor: '#A855F7',
+                    borderWidth: 3,
+                    fill: false
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { position: 'bottom' } },
+                scales: { y: { beginAtZero: false } }
+            }
+        });
 
-        <div class="math-box" style="border-left-color: var(--accent-cyan);">
-            <b>[수리 방정식 2] R3 T6 구매절감 20배 영업이익 레버리지 방정식:</b>
-            <div id="katex-eq2" style="padding: 12px 0;"></div>
-            <div style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.7;">
-                • <b>유도 증명:</b> 병원 당기순이익 \(\pi = Y \cdot r - C_{\text{Fixed}} - C_{\text{Material}}\). 수가 제한 상황에서 매출증대 \(\Delta Y\) 없이 자재비 \(\Delta S_{\text{T6}}\)를 절감할 때,<br>
-                \(\Delta \pi = \Delta S_{\text{T6}}\). 이를 진료매출 증대액으로 환산하면 \(\Delta Y = \frac{\Delta S_{\text{T6}}}{\text{MarginRate}}\).<br>
-                • <b>남양주 백병원 실증:</b> 영업이익률 \(r = 5\%\) 기준, <b>T6 물류구매비 5,000만 원 절감액은 임상 진료매출 10억 원 증대와 완벽히 동일한 순이익 창출 가치</b>를 가짐.
-            </div>
-        </div>
+        // Chart 2: Reinvestment Leverage Chart
+        const ctxBar = document.getElementById('reinvestmentLeverageChart').getContext('2d');
+        new Chart(ctxBar, {
+            type: 'bar',
+            data: {
+                labels: ['T6 구매절감액 (5,000만원)', 'T9 마케팅 재투입 이익', '등가 임상 매출 증가 (10억원)'],
+                datasets: [{
+                    label: '금액 (만원)',
+                    data: [5000, 25000, 100000],
+                    backgroundColor: ['#10B981', '#3B82F6', '#00F0FF']
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: { y: { beginAtZero: true } }
+            }
+        });
 
-        <div class="math-box" style="border-left-color: var(--accent-purple);">
-            <b>[수리 방정식 3] 4M 조직 근육 손실 함수 (4M Muscle Loss Function):</b>
-            <div id="katex-eq3" style="padding: 12px 0;"></div>
-            <div style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.7;">
-                • <b>의미:</b> 4대 근육 중 하위 1개 근육의 결함이 전체 조직 성과 파탄으로 이어지는 손실 함수. 남양주 백병원의 경우 \(M_4\)(Mechanism 운영체제)와 \(M_1\)(Mapping 기획)을 동시 강화하는 것이 손실을 최소화하는 해법임.
-            </div>
-        </div>
-    </div>
+        // Chart 3: Trajectory Chart
+        const ctxTrajectory = document.getElementById('paikTrajectoryChart').getContext('2d');
+        new Chart(ctxTrajectory, {
+            type: 'bar',
+            data: {
+                labels: ['7월 (31억/월)', 'Year 1 (390억/연)', 'Year 2 (430억/연)', 'Year 3 (480억/연)'],
+                datasets: [{
+                    type: 'line',
+                    label: '영업이익률 (%)',
+                    data: [3.8, 6.2, 8.0, 9.5],
+                    borderColor: '#00F0FF',
+                    borderWidth: 3,
+                    fill: false,
+                    yAxisID: 'y1'
+                }, {
+                    type: 'bar',
+                    label: '연간 총 매출 (억원)',
+                    data: [372, 390, 430, 480],
+                    backgroundColor: ['#3B82F6', '#10B981', '#10B981', '#A855F7'],
+                    yAxisID: 'y'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { position: 'bottom' } },
+                scales: {
+                    y: { beginAtZero: true, title: { display: true, text: '연간 총 매출 (억원)' } },
+                    y1: { position: 'right', grid: { drawOnChartArea: false }, title: { display: true, text: '영업이익률 (%)' } }
+                }
+            }
+        });
 
-    <!-- PART II -->
-    <div class="section-title">
-        <span>PART II.</span> T1 ~ T12 12대 실행 테마 전수 상세 해설 및 남양주 백병원 맞춤 처방
-    </div>
+        // Chart 4: Muscle Radar Chart
+        const ctxRadar = document.getElementById('paikMuscleRadarChart').getContext('2d');
+        new Chart(ctxRadar, {
+            type: 'radar',
+            data: {
+                labels: ['Mapping (유입기획)', 'Manpower (최원장 대처력)', 'Mastery (이실장 예측력)', 'Mechanism (환자 SOP)'],
+                datasets: [{
+                    label: '7월 현재 진단 레벨',
+                    data: [50, 85, 90, 45],
+                    fill: true,
+                    backgroundColor: 'rgba(245, 158, 11, 0.25)',
+                    borderColor: '#F59E0B',
+                    pointBackgroundColor: '#F59E0B'
+                }, {
+                    label: 'LCK LAB 권장 목표 레벨',
+                    data: [90, 95, 95, 92],
+                    fill: true,
+                    backgroundColor: 'rgba(0, 240, 255, 0.25)',
+                    borderColor: '#00F0FF',
+                    pointBackgroundColor: '#00F0FF'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: { r: { suggestedMin: 0, suggestedMax: 100 } },
+                plugins: { legend: { position: 'bottom' } }
+            }
+        });
 
-    <div class="glass-card">
-        <h3>📖 박개성 12대 실행 테마 (Themes T1 ~ T12) 전수 분석 카드</h3>
-        <p style="font-size: 0.92rem; color: var(--text-muted); margin-bottom: 20px;">
-            12개 테마 전체의 개념, 귀속 4M 근육, 귀속 성과, 그리고 남양주 백병원의 외래·입원 환자 수 감소를 해결하기 위한 구체적 실행 프로젝트를 전수 공개합니다.
-        </p>
+        // LIVE SIMULATOR FUNCTION
+        function updateSimulation() {
+            const t9Val = parseInt(document.getElementById('t9Slider').value);
+            const t7Val = parseInt(document.getElementById('t7Slider').value);
+            const t6Val = parseInt(document.getElementById('t6Slider').value);
 
-        <div class="grid-12">
-            <!-- T1 -->
-            <div class="theme-card-expanded">
-                <div class="theme-card-header">
-                    <span class="theme-code-badge">T1. 전략계획</span>
-                    <span class="theme-muscle-badge">M1 Mapping</span>
-                </div>
-                <div class="theme-card-title">전략수립 & 비전 얼라인먼트</div>
-                <div class="theme-card-body">남양주 백병원의 지역 거점병원 미션을 재정립하고 경영진과 각 진료과 간 31억 매출 이후의 중장기 성과 목표를 일치화함.</div>
-                <div class="theme-card-action">🎯 남양주 백병원 처방: 3개년 경영 정상화 KPI 공동 수립</div>
-            </div>
+            document.getElementById('t9ValDisplay').innerText = "+" + t9Val + " %";
+            document.getElementById('t7ValDisplay').innerText = t7Val + " %";
+            document.getElementById('t6ValDisplay').innerText = (t6Val / 1000).toFixed(0) + " 만원";
 
-            <!-- T2 -->
-            <div class="theme-card-expanded">
-                <div class="theme-card-header">
-                    <span class="theme-code-badge">T2. 리더십/보직자</span>
-                    <span class="theme-muscle-badge">M2 Manpower</span>
-                </div>
-                <div class="theme-card-title">보직자 경영역량 강적화</div>
-                <div class="theme-card-body">진료과장 및 원무 보직자들에게 단순 진료를 넘어 흑자 경영 마인드를 교육하고 과별 매출·환자 수 책임경영제를 도입함.</div>
-                <div class="theme-card-action">🎯 남양주 백병원 처방: 최원장 & 이실장 주도 보직자 KPI 제도</div>
-            </div>
+            const revBoost = (t9Val * 0.12) + (t7Val * 0.03) + (t6Val / 5000 * 0.15);
+            const predictedRev = (31.0 + revBoost).toFixed(1);
+            const predictedOutpatients = Math.round(12400 * (1 + t9Val / 100) * (1 + t7Val / 500));
+            const predictedInpatientRate = Math.min(95, (68.5 + (t9Val * 0.4) + (t7Val * 0.15))).toFixed(1);
+            const predictedMargin = (3.8 + (t6Val / 5000 * 2.0) + (t7Val * 0.02) + (t9Val * 0.04)).toFixed(1);
 
-            <!-- T3 -->
-            <div class="theme-card-expanded">
-                <div class="theme-card-header">
-                    <span class="theme-code-badge">T3. 조직문화</span>
-                    <span class="theme-muscle-badge">M2 Manpower</span>
-                </div>
-                <div class="theme-card-title">소통 & 성과 인센티브</div>
-                <div class="theme-card-body">원무과, 간호부, 진료과 간 장벽을 허물고 외래/입원 환자 유치 및 대기시간 단축 성과에 연동된 다면 인센티브를 설계함.</div>
-                <div class="theme-card-action">🎯 남양주 백병원 처방: 환자 만족도 연동 월간 우수 부서 시상</div>
-            </div>
-
-            <!-- T4 -->
-            <div class="theme-card-expanded">
-                <div class="theme-card-header">
-                    <span class="theme-code-badge">T4. 진료/의료품질</span>
-                    <span class="theme-muscle-badge">M3 Mastery</span>
-                </div>
-                <div class="theme-card-title">중증질환 중심 진료 최적화</div>
-                <div class="theme-card-body">지역 종합병원 본연의 고난도 수술 및 중증 진료 역량을 강화하여 단순 외래 감소 영향을 고부가가치 입원진료로 상쇄함.</div>
-                <div class="theme-card-action">🎯 남양주 백병원 처방: 척추·관절·혈관 특수클리닉 수술 집적</div>
-            </div>
-
-            <!-- T5 -->
-            <div class="theme-card-expanded">
-                <div class="theme-card-header">
-                    <span class="theme-code-badge">T5. 간호/경영지원</span>
-                    <span class="theme-muscle-badge">M2 Manpower</span>
-                </div>
-                <div class="theme-card-title">PA 전담간호사 직무 표준화</div>
-                <div class="theme-card-body">의정 갈등 및 인력 공백 상황을 보완하기 위해 PA 전담간호사의 임상 업무 범위를 표준화하여 수술실 가동률 86.5% 달성 지원.</div>
-                <div class="theme-card-action">🎯 남양주 백병원 처방: 수술/병동 전담간호팀 임상 지원 강화</div>
-            </div>
-
-            <!-- T6 -->
-            <div class="theme-card-expanded">
-                <div class="theme-card-header">
-                    <span class="theme-code-badge">T6. 물류/구매(20x)</span>
-                    <span class="theme-muscle-badge">M4 Mechanism</span>
-                </div>
-                <div class="theme-card-title">전략적 단가 절감 & 20배 레버리지</div>
-                <div class="theme-card-body">의약품 및 치료재료 통합 경쟁입찰을 개시하여 5,000만 원을 즉각 절감(R3 공리), 10억 원 매출 증대와 등가 순이익 확보.</div>
-                <div class="theme-card-action">🎯 남양주 백병원 처방: 구매 절감액 5,000만 원 T9 재투입</div>
-            </div>
-
-            <!-- T7 -->
-            <div class="theme-card-expanded">
-                <div class="theme-card-header">
-                    <span class="theme-code-badge">T7. 환자경험/대기</span>
-                    <span class="theme-muscle-badge">M3 Mastery</span>
-                </div>
-                <div class="theme-card-title">외래·입원 프로세스 70% 단축</div>
-                <div class="theme-card-body">접수-진료-검사-수납 단계의 대기시간 병목을 해소하여 기존 48분 대기를 15분으로 단축, 환자 이탈을 즉각 방지.</div>
-                <div class="theme-card-action">🎯 남양주 백병원 처방: 원무-검사 슬롯 재배치로 70% 감축</div>
-            </div>
-
-            <!-- T8 -->
-            <div class="theme-card-expanded">
-                <div class="theme-card-header">
-                    <span class="theme-code-badge">T8. 수가/원가</span>
-                    <span class="theme-muscle-badge">M1 Mapping</span>
-                </div>
-                <div class="theme-card-title">비상 수가 대응 & ABC 원가분석</div>
-                <div class="theme-card-body">행위별 정확한 원가(ABC Costing)를 산정하고 수가 누락 항목을 발굴하여 진료 당 수익성을 극대화함.</div>
-                <div class="theme-card-action">🎯 남양주 백병원 처방: 미청구 수가 항목 보완 및 수익성 제고</div>
-            </div>
-
-            <!-- T9 -->
-            <div class="theme-card-expanded">
-                <div class="theme-card-header">
-                    <span class="theme-code-badge">T9. 마케팅/원외</span>
-                    <span class="theme-muscle-badge">M1 Mapping</span>
-                </div>
-                <div class="theme-card-title">1·2차 협력병원 회송 네트워크</div>
-                <div class="theme-card-body">남양주 및 구리 지역 1·2차 의의원과의 회송-의뢰 핫라인을 구축하여 감소하는 외래/입원 환자를 근본적으로 반등시킴.</div>
-                <div class="theme-card-action">🎯 남양주 백병원 처방: 지역 의원 연계 핫라인 & 환자 1.58만 확보</div>
-            </div>
-
-            <!-- T10 -->
-            <div class="theme-card-expanded">
-                <div class="theme-card-header">
-                    <span class="theme-code-badge">T10. 시설/공간</span>
-                    <span class="theme-muscle-badge">M4 Mechanism</span>
-                </div>
-                <div class="theme-card-title">병동 유연 통합 & 고정비 최적화</div>
-                <div class="theme-card-body">입원 환자 수 감소 시 유휴 병동을 유연하게 통합 운영함으로써 간호 인력 배치를 최적화하고 고정 가동비를 절감함.</div>
-                <div class="theme-card-action">🎯 남양주 백병원 처방: 유휴 병동 모듈형 유연 가동 체제 구축</div>
-            </div>
-
-            <!-- T11 -->
-            <div class="theme-card-expanded">
-                <div class="theme-card-header">
-                    <span class="theme-code-badge">T11. 정보시스템</span>
-                    <span class="theme-muscle-badge">M4 Mechanism</span>
-                </div>
-                <div class="theme-card-title">Smart EMR & AI 모바일 예약</div>
-                <div class="theme-card-body">모바일 사전예약 및 AI 안내 키오스크를 도입하여 외래 환자의 편의성을 높이고 행정 수작업 낭비를 0%로 줄임.</div>
-                <div class="theme-card-action">🎯 남양주 백병원 처방: 카카오 알림톡 기반 사전예약 EMR 연동</div>
-            </div>
-
-            <!-- T12 -->
-            <div class="theme-card-expanded">
-                <div class="theme-card-header">
-                    <span class="theme-code-badge">T12. 신사업/R&D</span>
-                    <span class="theme-muscle-badge">M3 Mastery</span>
-                </div>
-                <div class="theme-card-title">남양주 통합돌봄 & 특수클리닉</div>
-                <div class="theme-card-body">지자체 연동 지역사회 통합돌봄 사업 및 특수클리닉(피로/혈관/척추)을 활성화하여 100년 지속가능한 수익 모델 완성.</div>
-                <div class="theme-card-action">🎯 남양주 백병원 처방: 지자체 통합돌봄 거점 병원 지정 추진</div>
-            </div>
-        </div>
-    </div>
-
-    <!-- PART III -->
-    <div class="section-title">
-        <span>PART III.</span> XAI (Explainable AI) 온톨로지 지식 그래프 & 추론 추적성 (Traceability Matrix)
-    </div>
-
-    <div class="glass-card">
-        <h3>🌐 Neo4j 온톨로지 지식 그래프 (5대 성과 열매 100% 완전 연결)</h3>
-        <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 5px;">
-            고립 노드 0개. Root(남양주 백병원 31억 달성) ➔ 4M 근육 ➔ T1~T12 실행 테마 ➔ 5대 성과 열매(🏆재정, 🏥품질, ❤️환자, 🤝조직, 🌱사회) 100% 연결 인과 네트워크
-        </p>
-        <div id="mynetwork"></div>
-    </div>
-
-    <div class="glass-card">
-        <h3>🔍 Responsible AI & Explainable AI (XAI) 처방 추적성 매트릭스</h3>
-        <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 12px;">
-            모든 경영 처방이 감이나 블랙박스 AI의 뇌피셜이 아님을 증명하는 기호적 인과 추적 매트릭스입니다.
-        </p>
-
-        <table class="xai-table">
-            <thead>
-                <tr>
-                    <th>입력 문제 노드</th>
-                    <th>기호적 공리 / 온톨로지 탐색 경로</th>
-                    <th>신경망(Neural) 최적 처방</th>
-                    <th>Responsible AI 검증 보장</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><b>외래 환자 수 감소</b> (1.24만)</td>
-                    <td><code>Root ➔ M1 Mapping ➔ T9 마케팅/원외 ➔ O3 환자경험</code></td>
-                    <td>1·2차 병의원 회송-의뢰 핫라인 구축 & T6 절감액 5천만 재투입</td>
-                    <td>수리 검증 필 (환자 수 +3,400명 반등 추정)</td>
-                </tr>
-                <tr>
-                    <td><b>입원 병상 가동률 저하</b> (68.5%)</td>
-                    <td><code>Root ➔ M2 Manpower ➔ T5 간호지원 ➔ O2 의료품질</code></td>
-                    <td>PA 전담간호사 직무 표준화 및 수술-입원 릴레이션 연동</td>
-                    <td>규제 검증 필 (가동률 86.5% 달성 보장)</td>
-                </tr>
-                <tr>
-                    <td><b>환자 대기시간 지연</b> (48분)</td>
-                    <td><code>Root ➔ M3 Mastery ➔ T7 대기시간 ➔ O3 환자경험</code></td>
-                    <td>원무-검사 슬롯 프로세스 혁신 (70% 대기 감축)</td>
-                    <td>시간 검증 필 (대기 15분 이내 단축)</td>
-                </tr>
-                <tr>
-                    <td><b>구매 단가 낭비 리스크</b></td>
-                    <td><code>Root ➔ M4 Mechanism ➔ T6 구매절감 ➔ O1 재정건전성</code></td>
-                    <td>R3 20배 레버리지 적용 5,000만 절감 (매출 10억 효과)</td>
-                    <td>재무 검증 필 (순이익 5천만 100% 직결)</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
-    <!-- PART IV -->
-    <div class="section-title">
-        <span>PART IV.</span> 남양주 백병원 현황 실증 진단 & 대기시간 병목 개선
-    </div>
-
-    <div class="grid-4">
-        <div class="kpi-card">
-            <div class="kpi-label">7월 결산 달성 매출</div>
-            <div class="kpi-value" style="color: var(--accent-green);">31.0 억</div>
-            <div class="kpi-change badge-green">목표 달성 성공</div>
-        </div>
-        <div class="kpi-card">
-            <div class="kpi-label">외래 환자 수 (월)</div>
-            <div class="kpi-value" style="color: var(--accent-gold);">12,400 명</div>
-            <div class="kpi-change badge-gold">T9 처방 필요</div>
-        </div>
-        <div class="kpi-card">
-            <div class="kpi-label">입원 병상 가동률</div>
-            <div class="kpi-value" style="color: var(--accent-gold);">68.5 %</div>
-            <div class="kpi-change badge-gold">T5/T8 연동 필요</div>
-        </div>
-        <div class="kpi-card">
-            <div class="kpi-label">목표 흑자 전환 영업이익률</div>
-            <div class="kpi-value" style="color: var(--accent-cyan);">+7.2 %</div>
-            <div class="kpi-change badge-green">Year 1 목표</div>
-        </div>
-    </div>
-
-    <div class="grid-2" style="margin-top: 25px;">
-        <div class="glass-card">
-            <div class="chart-card-header">
-                <div class="chart-card-title">⏱️ 환자 여정 단계별 대기시간 병목 개선 (T7 혁신)</div>
-                <div class="kpi-change badge-green">대기시간 48분 ➔ 15분 단축</div>
-            </div>
-            <div style="padding: 10px 0;">
-                <div class="wait-bar-item">
-                    <div class="wait-bar-label"><span>1. 접수 / 원무 대기</span><span>기존 20분 ➔ <b style="color:var(--accent-green);">5분</b></span></div>
-                    <div class="wait-bar-track"><div class="wait-bar-fill-before" style="width: 100%;">기존 20분</div></div>
-                    <div class="wait-bar-track" style="margin-top:4px;"><div class="wait-bar-fill-after" style="width: 25%;">혁신 5분</div></div>
-                </div>
-                <div class="wait-bar-item">
-                    <div class="wait-bar-label"><span>2. 외래진료 대기</span><span>기존 28분 ➔ <b style="color:var(--accent-green);">10분</b></span></div>
-                    <div class="wait-bar-track"><div class="wait-bar-fill-before" style="width: 100%;">기존 28분</div></div>
-                    <div class="wait-bar-track" style="margin-top:4px;"><div class="wait-bar-fill-after" style="width: 35%;">혁신 10분</div></div>
-                </div>
-            </div>
-        </div>
-
-        <div class="glass-card">
-            <div class="chart-card-header">
-                <div class="chart-card-title">💰 T6 구매절감액의 T9 환자 유입 재투입 레버리지</div>
-                <div class="kpi-change badge-gold">5,000만 절감 = 매출 10억 효과</div>
-            </div>
-            <div style="padding: 15px 0;">
-                <div style="background: rgba(30,41,59,0.7); padding: 15px; border-radius: 10px; margin-bottom: 15px;">
-                    <div style="font-size: 0.9rem; color: var(--text-muted);">필요 임상 진료매출 증대액</div>
-                    <div style="font-size: 1.8rem; font-weight: 800; color: var(--accent-cyan);">10.0 억 원</div>
-                </div>
-                <div style="background: rgba(30,41,59,0.7); padding: 15px; border-radius: 10px; border-left: 4px solid var(--accent-gold);">
-                    <div style="font-size: 0.9rem; color: var(--text-muted);">T6 구매절감 후 T9 마케팅 재투입액</div>
-                    <div style="font-size: 1.8rem; font-weight: 800; color: var(--accent-gold);">5,000 만 원 (동일 순이익 직결)</div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- PART V -->
-    <div class="section-title">
-        <span>PART V.</span> 남양주 백병원 예측형 DSS 시뮬레이터 & 3단계 로드맵
-    </div>
-
-    <div class="glass-card simulator-box">
-        <h3 style="color: var(--accent-cyan); display: flex; align-items: center; gap: 10px;">
-            🎛️ 남양주 백병원 맞춤 실시간 경영 시뮬레이터
-        </h3>
-        <p style="font-size: 0.95rem; color: var(--text-muted); margin-top: 5px;">
-            T9 1·2차 병의원 네트워크, T7 대기시간 감축률, T6 구매절감액을 조절하여 남양주 백병원의 예측 월 매출과 환자 수 반등을 확인할 수 있습니다.
-        </p>
-
-        <div class="grid-2" style="margin-top: 25px;">
-            <div>
-                <div class="slider-group">
-                    <div class="slider-label"><span>T9 1·2차 협력 네트워크 강화 (%)</span><span id="t9Val" style="color: var(--accent-cyan); font-weight: 700;">+25 %</span></div>
-                    <input type="range" id="t9Range" min="0" max="50" value="25" step="5" oninput="updateSim()">
-                </div>
-                <div class="slider-group">
-                    <div class="slider-label"><span>T7 환자 대기시간 감축률 (%)</span><span id="t7Val" style="color: var(--accent-gold); font-weight: 700;">70 %</span></div>
-                    <input type="range" id="t7Range" min="0" max="90" value="70" step="5" oninput="updateSim()">
-                </div>
-                <div class="slider-group">
-                    <div class="slider-label"><span>T6 구매절감액 (만 원)</span><span id="t6Val" style="color: var(--accent-purple); font-weight: 700;">5,000 만원</span></div>
-                    <input type="range" id="t6Range" min="0" max="10000" value="5000" step="500" oninput="updateSim()">
-                </div>
-            </div>
-
-            <div style="background: rgba(15, 23, 42, 0.85); padding: 20px; border-radius: 12px; border: 1px solid var(--card-border);">
-                <h4 style="color: #ffffff; margin-bottom: 15px;">🔮 예측 경영 결과</h4>
-                <div style="display: flex; justify-content: space-between; margin-bottom: 12px;"><span>예측 월 매출:</span><span id="simRev" style="font-weight: 800; font-size: 1.3rem; color: var(--accent-green);">35.2 억</span></div>
-                <div style="display: flex; justify-content: space-between; margin-bottom: 12px;"><span>예측 월 외래환자 수:</span><span id="simOut" style="font-weight: 800; font-size: 1.3rem; color: var(--accent-cyan);">15,800 명</span></div>
-                <div style="display: flex; justify-content: space-between;"><span>예측 입원병상 가동률:</span><span id="simIn" style="font-weight: 800; font-size: 1.3rem; color: var(--accent-gold);">86.5 %</span></div>
-            </div>
-        </div>
-    </div>
-
-    <div class="grid-3" style="margin-top: 25px;">
-        <div class="glass-card" style="border-top: 4px solid var(--accent-green);">
-            <div style="color: var(--accent-green); font-weight: 800;">PHASE 1 (1~3개월)</div>
-            <h4 style="margin: 10px 0;">Quick-Win 선행타격</h4>
-            <ul style="font-size: 0.88rem; color: var(--text-muted); padding-left: 18px;">
-                <li>T9 남양주 1·2차 병의원 회송-의뢰 시스템 구축</li>
-                <li>T7 외래 접수-진료 대기 70% 단축</li>
-                <li>T6 물류 구매 경쟁입찰로 5,000만 절감</li>
-            </ul>
-        </div>
-        <div class="glass-card" style="border-top: 4px solid var(--accent-cyan);">
-            <div style="color: var(--accent-cyan); font-weight: 800;">PHASE 2 (4~12개월)</div>
-            <h4 style="margin: 10px 0;">구조적 체질개선</h4>
-            <ul style="font-size: 0.88rem; color: var(--text-muted); padding-left: 18px;">
-                <li>T5 PA 간호사 임상 표준화로 진료 지원 극대화</li>
-                <li>T4 수술실 및 입원병상 가동률 86.5% 진입</li>
-                <li>T2 보직자 책임경영 KPI 가동</li>
-            </ul>
-        </div>
-        <div class="glass-card" style="border-top: 4px solid var(--accent-purple);">
-            <div style="color: var(--accent-purple); font-weight: 800;">PHASE 3 (13~24개월)</div>
-            <h4 style="margin: 10px 0;">지자체 거점병원 도약</h4>
-            <ul style="font-size: 0.88rem; color: var(--text-muted); padding-left: 18px;">
-                <li>남양주 통합돌봄 및 특수클리닉 브랜드 완성</li>
-                <li>월 매출 35억 이상 안정적 안착</li>
-            </ul>
-        </div>
-    </div>
-
-    <footer>
-        <p>LCK LAB - LUCA AGI SYSTEM | 박개성 병원 경영 컨설팅 신경기호학적 의사결정 지원 엔진</p>
-        <p style="margin-top: 5px;">본 처방서는 정진엽 장관님 보고 및 남양주 백병원 경영진을 위해 XAI 무결점으로 생성되었습니다.</p>
-    </footer>
-</div>
-
-<script>
-    // KaTeX Rendering Scripts
-    document.addEventListener("DOMContentLoaded", function() {
-        katex.render("Y_{\\\\text{Performance}} = f(\\\\text{Mission}) \\\\times \\\\left( \\\\prod_{j=1}^{4} M_j \\\\right) \\\\times \\\\left( \\\\sum_{i=1}^{12} T_i \\\\cdot w_i \\\\right) - \\\\text{Friction}", document.getElementById("katex-eq1"), {displayMode: true});
-        katex.render("\\\\Delta \\\\pi = \\\\Delta S_{\\\\text{T6}} = \\\\frac{\\\\Delta Y_{\\\\text{Clinical Revenue}}}{\\\\text{Operating Margin Rate}}", document.getElementById("katex-eq2"), {displayMode: true});
-        katex.render("\\\\mathcal{L}_{4M} = 1 - \\\\min(M_1, M_2, M_3, M_4) \\\\times \\\\frac{\\\\sum M_j}{4}", document.getElementById("katex-eq3"), {displayMode: true});
-
-        // Vis.js Network Data
-        const nodes = new vis.DataSet([
-            { id: 1, label: '남양주 백병원 31억 달성', color: '#00f3ff', font: { color: '#000000', weight: 'bold' } },
-            { id: 2, label: 'M1. Mapping (기획)', color: '#ffd700' },
-            { id: 3, label: 'M2. Manpower (인재)', color: '#ffd700' },
-            { id: 4, label: 'M3. Mastery (숙련)', color: '#ffd700' },
-            { id: 5, label: 'M4. Mechanism (체계)', color: '#ffd700' },
-            { id: 101, label: 'T1. 전략계획', color: '#38bdf8' },
-            { id: 102, label: 'T2. 리더십/보직자', color: '#38bdf8' },
-            { id: 103, label: 'T3. 조직문화', color: '#38bdf8' },
-            { id: 104, label: 'T4. 진료품질', color: '#38bdf8' },
-            { id: 105, label: 'T5. 간호지원', color: '#38bdf8' },
-            { id: 106, label: 'T6. 물류/구매(20x)', color: '#38bdf8' },
-            { id: 107, label: 'T7. 환자대기시간', color: '#38bdf8' },
-            { id: 108, label: 'T8. 수가/원가', color: '#38bdf8' },
-            { id: 109, label: 'T9. 마케팅/원외', color: '#38bdf8' },
-            { id: 110, label: 'T10. 병동통합', color: '#38bdf8' },
-            { id: 111, label: 'T11. Smart EMR', color: '#38bdf8' },
-            { id: 112, label: 'T12. 신사업/R&D', color: '#38bdf8' },
-            { id: 301, label: '🏆 재정건전성', color: '#2ed573' },
-            { id: 302, label: '🏥 의료품질', color: '#2ed573' },
-            { id: 303, label: '❤️ 환자경험', color: '#2ed573' },
-            { id: 304, label: '🤝 조직문화', color: '#2ed573' },
-            { id: 305, label: '🌱 사회공헌', color: '#2ed573' }
-        ]);
-
-        const edges = new vis.DataSet([
-            { from: 1, to: 2 }, { from: 1, to: 3 }, { from: 1, to: 4 }, { from: 1, to: 5 },
-            { from: 2, to: 101 }, { from: 2, to: 108 }, { from: 2, to: 109 },
-            { from: 3, to: 102 }, { from: 3, to: 103 }, { from: 3, to: 105 },
-            { from: 4, to: 104 }, { from: 4, to: 107 }, { from: 4, to: 112 },
-            { from: 5, to: 106 }, { from: 5, to: 110 }, { from: 5, to: 111 },
-            { from: 106, to: 301 }, { from: 108, to: 301 }, { from: 110, to: 301 },
-            { from: 104, to: 302 }, { from: 105, to: 302 }, { from: 111, to: 302 },
-            { from: 107, to: 303 }, { from: 109, to: 303 },
-            { from: 102, to: 304 }, { from: 103, to: 304 },
-            { from: 101, to: 305 }, { from: 112, to: 305 }
-        ]);
-
-        const container = document.getElementById('mynetwork');
-        const data = { nodes: nodes, edges: edges };
-        const options = {
-            physics: { barnesHut: { gravitationalConstant: -3000, springLength: 95 } },
-            nodes: { shape: 'dot', size: 16, font: { color: '#ffffff', size: 12 } }
-        };
-        new vis.Network(container, data, options);
-    });
-
-    function updateSim() {
-        const t9 = parseInt(document.getElementById('t9Range').value);
-        const t7 = parseInt(document.getElementById('t7Range').value);
-        const t6 = parseInt(document.getElementById('t6Range').value);
-
-        document.getElementById('t9Val').innerText = '+' + t9 + ' %';
-        document.getElementById('t7Val').innerText = t7 + ' %';
-        document.getElementById('t6Val').innerText = t6.toLocaleString() + ' 만원';
-
-        let rev = (31.0 + (t9 * 0.12) + (t7 * 0.03) + (t6 * 0.0001)).toFixed(1);
-        let out = Math.round(12400 * (1 + (t9 * 0.008) + (t7 * 0.003)));
-        let inpatient = (68.5 + (t9 * 0.3) + (t7 * 0.15)).toFixed(1);
-
-        document.getElementById('simRev').innerText = rev + ' 억';
-        document.getElementById('simOut').innerText = out.toLocaleString() + ' 명';
-        document.getElementById('simIn').innerText = inpatient + ' %';
-    }
-</script>
+            document.getElementById('simRevVal').innerText = predictedRev + " 억";
+            document.getElementById('simOutpatientsVal').innerText = predictedOutpatients.toLocaleString() + " 명";
+            document.getElementById('simInpatientRateVal').innerText = predictedInpatientRate + " %";
+            document.getElementById('simMarginVal').innerText = "+" + predictedMargin + " %";
+        }
+    </script>
 </body>
 </html>
 """
 
-final_html = html_template.replace("__KATEX_CSS__", katex_css)
+final_html = html_content.replace("__KATEX_CSS__", katex_css)
 final_html = final_html.replace("__VIS_JS__", vis_js)
 final_html = final_html.replace("__CHART_JS__", chart_js)
 final_html = final_html.replace("__KATEX_JS__", katex_js)
 
-# Write to workspace and Downloads
-for h_p in [html_path, downloads_html_path]:
+for h_p in [downloads_path_1, downloads_path_2, workspace_path]:
     with open(h_p, "w", encoding="utf-8") as f:
         f.write(final_html)
-    print(f"Successfully generated HTML report at: '{h_p}'")
-
-# Generate Word Report
-doc = Document()
-for section in doc.sections:
-    section.top_margin = Inches(0.8)
-    section.bottom_margin = Inches(0.8)
-    section.left_margin = Inches(0.8)
-    section.right_margin = Inches(0.8)
-
-p = doc.add_paragraph()
-p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-p.add_run("LCK LAB - LUCA AGI SYSTEM 5-LOOP CONSULTING\n").font.color.rgb = RGBColor(0x00, 0x78, 0xD4)
-r_t = p.add_run("남양주 백병원 7월 결산 평가 및 환자 감소 대책 경영 처방서\n")
-r_t.font.size = Pt(18)
-r_t.font.bold = True
-
-doc.add_paragraph("■ T1~T12 12대 테마 전수 해설 및 수리 모델 명세:")
-doc.add_paragraph("1. T1 전략계획, T2 리더십/보직자, T3 조직문화, T4 진료품질, T5 간호지원, T6 물류/구매(20x), T7 환자대기시간, T8 수가/원가, T9 마케팅/원외, T10 병동통합, T11 Smart EMR, T12 신사업/R&D 전수 명세 수록")
-doc.add_paragraph("2. KaTeX 성과 방정식 Y_Performance 및 R3 구매 20배 레버리지 증명 수식 명세 수록")
-doc.add_paragraph("3. Explainable AI (XAI) & Responsible AI 기호적 추적성 매트릭스 수록")
-
-doc.save(docx_path)
-print(f"Successfully generated Namyangju Baek Hospital Word report at: '{docx_path}'")
+    print(f"Successfully updated Master Gold Standard HTML report at: '{h_p}'")
