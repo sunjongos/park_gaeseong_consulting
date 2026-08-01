@@ -1,46 +1,7 @@
 import os
 import sys
-import urllib.request
-import docx
-from docx import Document
-from docx.shared import Inches, Pt, RGBColor
-from docx.enum.text import WD_ALIGN_PARAGRAPH
 
 sys.stdout.reconfigure(encoding='utf-8')
-
-print("Starting Master Gold-Standard HTML Report Generation (1080-Line Full Specification)...")
-
-script_dir = os.path.dirname(os.path.abspath(__file__))
-workspace_dir = os.getcwd()
-downloads_dir = r"C:\Users\sunjo\Downloads"
-cache_dir = os.path.join(script_dir, ".agent", "skills", "park_gaeseong_consulting", "knowledge_assets", "_cache")
-os.makedirs(cache_dir, exist_ok=True)
-
-downloads_path_1 = os.path.join(downloads_dir, "남양주 백병원 경영 진단 및 환자 감소 대책 처방서 - LCK LAB LUCA AGI SYSTEM.html")
-downloads_path_2 = os.path.join(downloads_dir, "남양주 백병원 7월 결산 평가 및 환자 감소 대책 경영 처방서 - LCK LAB LUCA AGI SYSTEM.html")
-workspace_path = os.path.join(workspace_dir, "namyangju_paik_park_gaeseong_consulting_integrated.html")
-
-def fetch_library(url, local_name):
-    local_path = os.path.join(cache_dir, local_name)
-    if os.path.exists(local_path):
-        with open(local_path, "r", encoding="utf-8") as f:
-            return f.read()
-    else:
-        try:
-            req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
-            with urllib.request.urlopen(req) as resp:
-                content = resp.read().decode('utf-8', errors='ignore')
-                with open(local_path, "w", encoding="utf-8") as f:
-                    f.write(content)
-                return content
-        except Exception as e:
-            print(f"Failed to fetch {url}: {e}")
-            return ""
-
-vis_js = fetch_library('https://unpkg.com/vis-network@9.1.2/standalone/umd/vis-network.min.js', 'vis-network.min.js')
-chart_js = fetch_library('https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js', 'chart.umd.min.js')
-katex_js = fetch_library('https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js', 'katex.min.js')
-katex_css = fetch_library('https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css', 'katex.min.css')
 
 html_content = r"""<!DOCTYPE html>
 <html lang="ko">
@@ -49,10 +10,11 @@ html_content = r"""<!DOCTYPE html>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>남양주 백병원 경영 진단 및 환자 감소 대책 처방서 - LCK LAB LUCA AGI SYSTEM</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+KR:wght@300;400;500;700;800;900&family=Outfit:wght@500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
     <style>
-        /* KaTeX Inlined CSS */
-        __KATEX_CSS__
-
         :root {
             --navy-primary: #030712;
             --navy-secondary: #0F172A;
@@ -75,108 +37,554 @@ html_content = r"""<!DOCTYPE html>
             --shadow-lg: 0 20px 45px rgba(3, 7, 18, 0.15);
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Noto Sans KR', 'Inter', sans-serif; background-color: var(--bg-light); color: var(--text-dark); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', 'Inter', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
 
         /* LCK LAB Top Nav */
-        .top-nav { background: linear-gradient(90deg, #030712 0%, #0F172A 100%); color: #FFFFFF; padding: 20px 48px; display: flex; justify-content: space-between; align-items: center; border-bottom: 3px solid var(--cyan-accent); box-shadow: 0 8px 30px rgba(0, 240, 255, 0.15); position: sticky; top: 0; z-index: 1000; }
-        .top-nav .brand { font-family: 'Outfit', sans-serif; font-size: 24px; font-weight: 900; letter-spacing: 2px; display: flex; align-items: center; gap: 14px; }
-        .top-nav .brand span { color: var(--cyan-accent); text-shadow: 0 0 12px var(--cyan-glow); }
-        .top-nav .meta-tag { font-size: 13px; background: linear-gradient(90deg, rgba(0,240,255,0.2) 0%, rgba(168,85,247,0.2) 100%); color: var(--cyan-accent); padding: 8px 20px; border-radius: 30px; border: 1px solid rgba(0, 240, 255, 0.5); font-weight: 700; box-shadow: 0 0 15px rgba(0, 240, 255, 0.2); }
+        .top-nav {
+            background: linear-gradient(90deg, #030712 0%, #0F172A 100%);
+            color: #FFFFFF;
+            padding: 20px 48px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px solid var(--cyan-accent);
+            box-shadow: 0 8px 30px rgba(0, 240, 255, 0.15);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
 
-        .container { max-width: 1380px; margin: 0 auto; padding: 48px 28px; }
+        .top-nav .brand {
+            font-family: 'Outfit', sans-serif;
+            font-size: 24px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .top-nav .brand span {
+            color: var(--cyan-accent);
+            text-shadow: 0 0 12px var(--cyan-glow);
+        }
+
+        .top-nav .meta-tag {
+            font-size: 13px;
+            background: linear-gradient(90deg, rgba(0,240,255,0.2) 0%, rgba(168,85,247,0.2) 100%);
+            color: var(--cyan-accent);
+            padding: 8px 20px;
+            border-radius: 30px;
+            border: 1px solid rgba(0, 240, 255, 0.5);
+            font-weight: 700;
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
+        }
+
+        .container {
+            max-width: 1380px;
+            margin: 0 auto;
+            padding: 48px 28px;
+        }
 
         /* Hero Banner */
-        .hero-banner { background: linear-gradient(135deg, #030712 0%, #0F172A 50%, #1E1B4B 100%); color: #FFFFFF; padding: 56px; border-radius: 24px; box-shadow: var(--shadow-lg); margin-bottom: 48px; position: relative; overflow: hidden; border: 1.5px solid rgba(0, 240, 255, 0.35); }
-        .hero-banner::after { content: ''; position: absolute; top: -40%; right: -10%; width: 600px; height: 600px; background: radial-gradient(circle, var(--cyan-glow) 0%, transparent 70%); pointer-events: none; }
-        .hero-banner .badge { display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(90deg, var(--cyan-accent) 0%, #0076FF 100%); color: #030712; font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 13px; text-transform: uppercase; letter-spacing: 2.5px; padding: 8px 20px; border-radius: 8px; margin-bottom: 24px; box-shadow: 0 0 20px var(--cyan-glow); }
-        .hero-banner h1 { font-size: 38px; font-weight: 900; line-height: 1.35; margin-bottom: 24px; letter-spacing: -0.5px; }
-        .hero-banner p { font-size: 18px; color: #E2E8F0; max-width: 1050px; line-height: 1.75; }
+        .hero-banner {
+            background: linear-gradient(135deg, #030712 0%, #0F172A 50%, #1E1B4B 100%);
+            color: #FFFFFF;
+            padding: 56px;
+            border-radius: 24px;
+            box-shadow: var(--shadow-lg);
+            margin-bottom: 48px;
+            position: relative;
+            overflow: hidden;
+            border: 1.5px solid rgba(0, 240, 255, 0.35);
+        }
+
+        .hero-banner::after {
+            content: '';
+            position: absolute;
+            top: -40%;
+            right: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, var(--cyan-glow) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-banner .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(90deg, var(--cyan-accent) 0%, #0076FF 100%);
+            color: #030712;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 900;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 2.5px;
+            padding: 8px 20px;
+            border-radius: 8px;
+            margin-bottom: 24px;
+            box-shadow: 0 0 20px var(--cyan-glow);
+        }
+
+        .hero-banner h1 {
+            font-size: 38px;
+            font-weight: 900;
+            line-height: 1.35;
+            margin-bottom: 24px;
+            letter-spacing: -0.5px;
+        }
+
+        .hero-banner p {
+            font-size: 18px;
+            color: #E2E8F0;
+            max-width: 1050px;
+            line-height: 1.75;
+        }
 
         /* Minister Message Box */
-        .minister-box { background: linear-gradient(135deg, #1E1B4B 0%, #311B92 100%); color: #FFFFFF; border-radius: 20px; padding: 32px 38px; margin-bottom: 40px; border: 2px solid var(--purple-accent); box-shadow: 0 12px 30px rgba(168, 85, 247, 0.25); position: relative; }
-        .minister-title { font-size: 20px; font-weight: 900; color: #E9D5FF; margin-bottom: 12px; display: flex; align-items: center; gap: 12px; }
-        .minister-quote { font-size: 16.5px; color: #F3E8FF; line-height: 1.7; font-style: italic; background: rgba(255, 255, 255, 0.06); padding: 20px; border-radius: 12px; border-left: 4px solid var(--purple-accent); }
+        .minister-box {
+            background: linear-gradient(135deg, #1E1B4B 0%, #311B92 100%);
+            color: #FFFFFF;
+            border-radius: 20px;
+            padding: 32px 38px;
+            margin-bottom: 40px;
+            border: 2px solid var(--purple-accent);
+            box-shadow: 0 12px 30px rgba(168, 85, 247, 0.25);
+            position: relative;
+        }
 
-        .part-header { background: linear-gradient(90deg, #030712 0%, #0F172A 100%); color: #FFFFFF; padding: 22px 36px; border-radius: 16px; margin: 48px 0 32px 0; display: flex; align-items: center; justify-content: space-between; border-left: 8px solid var(--cyan-accent); box-shadow: var(--shadow-md); }
-        .part-header.palantir { background: linear-gradient(90deg, #1E1B4B 0%, #311B92 60%, #4A148C 100%); border-left-color: var(--purple-accent); }
-        .part-title { font-family: 'Outfit', sans-serif; font-size: 24px; font-weight: 900; letter-spacing: 0.5px; display: flex; align-items: center; gap: 14px; }
-        .part-badge { font-size: 13px; background: rgba(0, 240, 255, 0.2); color: var(--cyan-accent); padding: 6px 16px; border-radius: 20px; font-weight: 800; border: 1px solid rgba(0, 240, 255, 0.4); }
+        .minister-title {
+            font-size: 20px;
+            font-weight: 900;
+            color: #E9D5FF;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
 
-        .card { background-color: var(--card-bg); border-radius: 20px; padding: 36px; border: 1px solid var(--border-color); box-shadow: var(--shadow-sm); margin-bottom: 44px; transition: all 0.3s ease; }
-        .card:hover { box-shadow: var(--shadow-md); }
+        .minister-quote {
+            font-size: 16.5px;
+            color: #F3E8FF;
+            line-height: 1.7;
+            font-style: italic;
+            background: rgba(255, 255, 255, 0.06);
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 4px solid var(--purple-accent);
+        }
 
-        .section-header { margin-bottom: 28px; display: flex; align-items: center; justify-content: space-between; }
-        .section-title { font-size: 25px; font-weight: 900; color: var(--navy-primary); display: flex; align-items: center; gap: 14px; position: relative; padding-left: 18px; }
-        .section-title::before { content: ''; position: absolute; left: 0; top: 4px; bottom: 4px; width: 6px; background: var(--cyan-accent); border-radius: 3px; }
-        .section-subtitle { font-size: 14.5px; color: var(--text-muted); }
+        .part-header {
+            background: linear-gradient(90deg, #030712 0%, #0F172A 100%);
+            color: #FFFFFF;
+            padding: 22px 36px;
+            border-radius: 16px;
+            margin: 48px 0 32px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-left: 8px solid var(--cyan-accent);
+            box-shadow: var(--shadow-md);
+        }
 
-        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-bottom: 32px; }
-        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-bottom: 32px; }
-        .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-bottom: 32px; }
+        .part-header.palantir {
+            background: linear-gradient(90deg, #1E1B4B 0%, #311B92 60%, #4A148C 100%);
+            border-left-color: var(--purple-accent);
+        }
 
-        @media (max-width: 1024px) { .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; } }
+        .part-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 24px;
+            font-weight: 900;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .part-badge {
+            font-size: 13px;
+            background: rgba(0, 240, 255, 0.2);
+            color: var(--cyan-accent);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-weight: 800;
+            border: 1px solid rgba(0, 240, 255, 0.4);
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 20px;
+            padding: 36px;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 44px;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            box-shadow: var(--shadow-md);
+        }
+
+        .section-header {
+            margin-bottom: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .section-title {
+            font-size: 25px;
+            font-weight: 900;
+            color: var(--navy-primary);
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            position: relative;
+            padding-left: 18px;
+        }
+
+        .section-title::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 4px;
+            bottom: 4px;
+            width: 6px;
+            background: var(--cyan-accent);
+            border-radius: 3px;
+        }
+
+        .section-subtitle {
+            font-size: 14.5px;
+            color: var(--text-muted);
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            margin-bottom: 32px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+            margin-bottom: 32px;
+        }
+
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+
+        @media (max-width: 1024px) {
+            .grid-2, .grid-3, .grid-4 {
+                grid-template-columns: 1fr;
+            }
+        }
 
         /* LIVE SIMULATOR WIDGET */
-        .simulator-box { background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%); color: #FFFFFF; border-radius: 20px; padding: 36px; border: 2px solid var(--cyan-accent); box-shadow: 0 15px 40px rgba(0, 240, 255, 0.15); margin-bottom: 36px; }
-        .simulator-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,0.1); }
-        .sim-title { font-size: 22px; font-weight: 900; color: var(--cyan-accent); display: flex; align-items: center; gap: 12px; }
-        .sim-control-group { margin-bottom: 20px; }
-        .sim-label { font-size: 14.5px; font-weight: 700; margin-bottom: 8px; display: flex; justify-content: space-between; }
-        .sim-slider { width: 100%; height: 8px; border-radius: 4px; background: #334155; outline: none; accent-color: var(--cyan-accent); cursor: pointer; }
-        .sim-output-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 28px; background: rgba(255, 255, 255, 0.05); padding: 24px; border-radius: 14px; border: 1px solid rgba(255, 255, 255, 0.1); }
-        .sim-output-card { text-align: center; }
-        .sim-output-val { font-family: 'Outfit', sans-serif; font-size: 32px; font-weight: 900; color: var(--cyan-accent); }
-        .sim-output-lbl { font-size: 13px; color: #94A3B8; margin-top: 4px; }
+        .simulator-box {
+            background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+            color: #FFFFFF;
+            border-radius: 20px;
+            padding: 36px;
+            border: 2px solid var(--cyan-accent);
+            box-shadow: 0 15px 40px rgba(0, 240, 255, 0.15);
+            margin-bottom: 36px;
+        }
+
+        .simulator-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .sim-title {
+            font-size: 22px;
+            font-weight: 900;
+            color: var(--cyan-accent);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .sim-control-group {
+            margin-bottom: 20px;
+        }
+
+        .sim-label {
+            font-size: 14.5px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .sim-slider {
+            width: 100%;
+            height: 8px;
+            border-radius: 4px;
+            background: #334155;
+            outline: none;
+            accent-color: var(--cyan-accent);
+            cursor: pointer;
+        }
+
+        .sim-output-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-top: 28px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 24px;
+            border-radius: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .sim-output-card {
+            text-align: center;
+        }
+
+        .sim-output-val {
+            font-family: 'Outfit', sans-serif;
+            font-size: 32px;
+            font-weight: 900;
+            color: var(--cyan-accent);
+        }
+
+        .sim-output-lbl {
+            font-size: 13px;
+            color: #94A3B8;
+            margin-top: 4px;
+        }
 
         /* Metric Comparison Cards */
-        .metric-comparison-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-bottom: 36px; }
-        .metric-comp-card { background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 16px; padding: 26px; text-align: center; box-shadow: var(--shadow-sm); }
+        .metric-comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            margin-bottom: 36px;
+        }
+
+        .metric-comp-card {
+            background: #FFFFFF;
+            border: 1px solid #E2E8F0;
+            border-radius: 16px;
+            padding: 26px;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+        }
+
         .metric-comp-card.alert { border-top: 6px solid var(--warning); }
         .metric-comp-card.success { border-top: 6px solid var(--success); }
-        .metric-comp-title { font-size: 14.5px; font-weight: 700; color: var(--text-muted); margin-bottom: 12px; }
-        .metric-before-val { font-family: 'Outfit', sans-serif; font-size: 28px; font-weight: 900; color: var(--warning); margin-bottom: 4px; }
-        .metric-arrow { font-size: 18px; color: var(--text-muted); margin: 6px 0; }
-        .metric-after-val { font-family: 'Outfit', sans-serif; font-size: 34px; font-weight: 900; color: var(--success); }
-        .metric-subtext { font-size: 12.5px; color: var(--text-muted); margin-top: 8px; }
 
-        .roadmap-phase-card { background: #FFFFFF; border: 1px solid var(--border-color); border-radius: 18px; padding: 30px; box-shadow: var(--shadow-sm); }
+        .metric-comp-title {
+            font-size: 14.5px;
+            font-weight: 700;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+        }
+
+        .metric-before-val {
+            font-family: 'Outfit', sans-serif;
+            font-size: 28px;
+            font-weight: 900;
+            color: var(--warning);
+            margin-bottom: 4px;
+        }
+
+        .metric-arrow {
+            font-size: 18px;
+            color: var(--text-muted);
+            margin: 6px 0;
+        }
+
+        .metric-after-val {
+            font-family: 'Outfit', sans-serif;
+            font-size: 34px;
+            font-weight: 900;
+            color: var(--success);
+        }
+
+        .metric-subtext {
+            font-size: 12.5px;
+            color: var(--text-muted);
+            margin-top: 8px;
+        }
+
+        .roadmap-phase-card {
+            background: #FFFFFF;
+            border: 1px solid var(--border-color);
+            border-radius: 18px;
+            padding: 30px;
+            box-shadow: var(--shadow-sm);
+        }
+
         .roadmap-phase-card.p1 { border-top: 6px solid var(--success); }
         .roadmap-phase-card.p2 { border-top: 6px solid var(--cyan-accent); }
         .roadmap-phase-card.p3 { border-top: 6px solid var(--purple-accent); }
 
-        .roadmap-phase-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid var(--border-color); }
-        .roadmap-phase-tag { font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 13px; letter-spacing: 1.5px; padding: 5px 16px; border-radius: 20px; text-transform: uppercase; }
+        .roadmap-phase-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 18px;
+            padding-bottom: 14px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .roadmap-phase-tag {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 900;
+            font-size: 13px;
+            letter-spacing: 1.5px;
+            padding: 5px 16px;
+            border-radius: 20px;
+            text-transform: uppercase;
+        }
+
         .p1 .roadmap-phase-tag { background: rgba(16, 185, 129, 0.15); color: var(--success); }
         .p2 .roadmap-phase-tag { background: rgba(0, 240, 255, 0.15); color: #0082B3; }
         .p3 .roadmap-phase-tag { background: rgba(168, 85, 247, 0.15); color: var(--purple-accent); }
 
-        .roadmap-title { font-size: 21px; font-weight: 900; color: var(--navy-primary); margin-bottom: 14px; }
-        .roadmap-deliverables { list-style: none; margin-top: 16px; }
-        .roadmap-deliverables li { font-size: 14.5px; color: var(--text-dark); margin-bottom: 10px; position: relative; padding-left: 24px; }
-        .roadmap-deliverables li::before { content: '✔'; position: absolute; left: 0; color: var(--success); font-weight: 900; }
+        .roadmap-title {
+            font-size: 21px;
+            font-weight: 900;
+            color: var(--navy-primary);
+            margin-bottom: 14px;
+        }
 
-        table.gantt-table { width: 100%; border-collapse: collapse; margin-top: 24px; font-size: 14.5px; }
-        table.gantt-table th { background: var(--navy-primary); color: #FFFFFF; padding: 16px; text-align: center; }
-        table.gantt-table td { padding: 16px; border-bottom: 1px solid var(--border-color); }
+        .roadmap-deliverables {
+            list-style: none;
+            margin-top: 16px;
+        }
 
-        .gantt-bar { height: 26px; border-radius: 13px; display: flex; align-items: center; justify-content: center; color: #FFFFFF; font-size: 12px; font-weight: 800; box-shadow: inset 0 0 5px rgba(0,0,0,0.2); }
+        .roadmap-deliverables li {
+            font-size: 14.5px;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+            position: relative;
+            padding-left: 24px;
+        }
+
+        .roadmap-deliverables li::before {
+            content: '✔';
+            position: absolute;
+            left: 0;
+            color: var(--success);
+            font-weight: 900;
+        }
+
+        table.gantt-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 24px;
+            font-size: 14.5px;
+        }
+
+        table.gantt-table th {
+            background: var(--navy-primary);
+            color: #FFFFFF;
+            padding: 16px;
+            text-align: center;
+        }
+
+        table.gantt-table td {
+            padding: 16px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .gantt-bar {
+            height: 26px;
+            border-radius: 13px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #FFFFFF;
+            font-size: 12px;
+            font-weight: 800;
+            box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+        }
+
         .gantt-bar.green { background: linear-gradient(90deg, #10B981 0%, #34D399 100%); }
         .gantt-bar.cyan { background: linear-gradient(90deg, #00A3E0 0%, #00F0FF 100%); color: #030712; }
         .gantt-bar.purple { background: linear-gradient(90deg, #8B5CF6 0%, #A855F7 100%); }
 
-        .math-card { background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 14px; padding: 28px; text-align: center; margin-bottom: 24px; }
-        .math-formula { font-size: 21px; color: var(--navy-primary); margin: 18px 0; font-family: 'JetBrains Mono', monospace; }
+        .math-card {
+            background: #F8FAFC;
+            border: 1px solid #E2E8F0;
+            border-radius: 14px;
+            padding: 28px;
+            text-align: center;
+            margin-bottom: 24px;
+        }
 
-        #graph-container { width: 100%; height: 580px; background-color: #030712; border-radius: 16px; border: 1px solid #1E293B; box-shadow: inset 0 0 35px rgba(0,0,0,0.7); }
+        .math-formula {
+            font-size: 21px;
+            color: var(--navy-primary);
+            margin: 18px 0;
+            font-family: 'JetBrains Mono', monospace;
+        }
 
-        .footer { text-align: center; padding: 56px 0; color: var(--text-muted); font-size: 14px; border-top: 1px solid var(--border-color); margin-top: 64px; }
+        #graph-container {
+            width: 100%;
+            height: 580px;
+            background-color: #030712;
+            border-radius: 16px;
+            border: 1px solid #1E293B;
+            box-shadow: inset 0 0 35px rgba(0,0,0,0.7);
+        }
+
+        .graph-legend {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+            margin-top: 18px;
+            font-size: 14px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 56px 0;
+            color: var(--text-muted);
+            font-size: 14px;
+            border-top: 1px solid var(--border-color);
+            margin-top: 64px;
+        }
     </style>
-
-    <!-- Inlined Libraries -->
-    <script>__VIS_JS__</script>
-    <script>__CHART_JS__</script>
-    <script>__KATEX_JS__</script>
 </head>
 <body>
 
@@ -186,7 +594,7 @@ html_content = r"""<!DOCTYPE html>
             LCK LAB <span>| 남양주 백병원 경영 진단 리포트</span>
         </div>
         <div class="meta-tag">
-            🩺 정진엽 장관님 보고용 맞춤 처방서 v1.0 (Neurosymbolic XAI Master)
+            🩺 정진엽 장관님 보고용 맞춤 처방서 v1.0
         </div>
     </div>
 
@@ -225,7 +633,7 @@ html_content = r"""<!DOCTYPE html>
 
         <div class="card">
             <div class="section-header">
-                <div class="section-title">⚖️ 남양주 백병원 경영진에 적용할 3대 핵심 공리 (R1, R3, R4)</div>
+                <div class="section-title">⚖️ 남양주 백병원 경영진에 적용할 3대 핵심 공리</div>
                 <div class="section-subtitle">Core Executive Principles for Namyangju Paik Hospital</div>
             </div>
 
@@ -253,14 +661,6 @@ html_content = r"""<!DOCTYPE html>
             </div>
         </div>
 
-        <div class="card">
-            <div class="section-header">
-                <div class="section-title">🌐 Neo4j 온톨로지 지식 그래프 (100% 완전 연결 네트워크)</div>
-                <div class="section-subtitle">Fully Connected Graph: Root ➔ 4M ➔ T1~T12 ➔ 5 Outcomes</div>
-            </div>
-            <div id="graph-container"></div>
-        </div>
-
         <!-- =================================================================== -->
         <!-- PART II: REAL-WORLD CASE ANALYSIS & DIAGNOSIS -->
         <!-- =================================================================== -->
@@ -277,7 +677,7 @@ html_content = r"""<!DOCTYPE html>
                 <div class="metric-comp-title">7월 결산 월 매출</div>
                 <div class="metric-before-val" style="color: var(--success);">31.0 억</div>
                 <div class="metric-arrow">➔ 목표 달성 성과 ➔</div>
-                <div class="metric-after-val" style="color: var(--cyan-accent);">35.2 억</div>
+                <div class="metric-after-val" style="color: var(--cyan-accent);">35.0 억</div>
                 <div class="metric-subtext">최원장 대처 & 이실장 예측 적중</div>
             </div>
 
@@ -285,7 +685,7 @@ html_content = r"""<!DOCTYPE html>
                 <div class="metric-comp-title">외래 환자 수 (월)</div>
                 <div class="metric-before-val">12,400 명 (감소)</div>
                 <div class="metric-arrow">➔ T9/T7 처방 ➔</div>
-                <div class="metric-after-val">15,800 명</div>
+                <div class="metric-after-val">16,200 명</div>
                 <div class="metric-subtext">1·2차 병의원 연계 & 사전예약 시스템</div>
             </div>
 
@@ -293,7 +693,7 @@ html_content = r"""<!DOCTYPE html>
                 <div class="metric-comp-title">입원 병상 가동률</div>
                 <div class="metric-before-val">68.5 % (감소)</div>
                 <div class="metric-arrow">➔ T5/T8 처방 ➔</div>
-                <div class="metric-after-val">86.5 %</div>
+                <div class="metric-after-val">88.0 %</div>
                 <div class="metric-subtext">수술/입원 릴레이션십 프로세스 연동</div>
             </div>
 
@@ -326,6 +726,7 @@ html_content = r"""<!DOCTYPE html>
                 </div>
             </div>
         </div>
+
 
         <!-- =================================================================== -->
         <!-- PART III: PREDICTIVE DSS SIMULATION -->
@@ -416,6 +817,7 @@ html_content = r"""<!DOCTYPE html>
                 </div>
             </div>
         </div>
+
 
         <!-- =================================================================== -->
         <!-- PART IV: EXECUTION ROADMAP & GANTT TABLE -->
@@ -533,55 +935,6 @@ html_content = r"""<!DOCTYPE html>
 
     <!-- Scripts for KaTeX, Vis.js and Chart.js -->
     <script>
-        // Vis.js Graph Rendering
-        document.addEventListener("DOMContentLoaded", function() {
-            const nodes = new vis.DataSet([
-                { id: 1, label: '남양주 백병원 31억 달성', color: '#00f3ff', font: { color: '#000000', weight: 'bold' } },
-                { id: 2, label: 'M1. Mapping (기획)', color: '#ffd700' },
-                { id: 3, label: 'M2. Manpower (인재)', color: '#ffd700' },
-                { id: 4, label: 'M3. Mastery (숙련)', color: '#ffd700' },
-                { id: 5, label: 'M4. Mechanism (체계)', color: '#ffd700' },
-                { id: 101, label: 'T1. 전략계획', color: '#38bdf8' },
-                { id: 102, label: 'T2. 리더십/보직자', color: '#38bdf8' },
-                { id: 103, label: 'T3. 조직문화', color: '#38bdf8' },
-                { id: 104, label: 'T4. 진료품질', color: '#38bdf8' },
-                { id: 105, label: 'T5. 간호지원', color: '#38bdf8' },
-                { id: 106, label: 'T6. 물류/구매(20x)', color: '#38bdf8' },
-                { id: 107, label: 'T7. 환자대기시간', color: '#38bdf8' },
-                { id: 108, label: 'T8. 수가/원가', color: '#38bdf8' },
-                { id: 109, label: 'T9. 마케팅/원외', color: '#38bdf8' },
-                { id: 110, label: 'T10. 병동통합', color: '#38bdf8' },
-                { id: 111, label: 'T11. Smart EMR', color: '#38bdf8' },
-                { id: 112, label: 'T12. 신사업/R&D', color: '#38bdf8' },
-                { id: 301, label: '🏆 재정건전성', color: '#2ed573' },
-                { id: 302, label: '🏥 의료품질', color: '#2ed573' },
-                { id: 303, label: '❤️ 환자경험', color: '#2ed573' },
-                { id: 304, label: '🤝 조직문화', color: '#2ed573' },
-                { id: 305, label: '🌱 사회공헌', color: '#2ed573' }
-            ]);
-
-            const edges = new vis.DataSet([
-                { from: 1, to: 2 }, { from: 1, to: 3 }, { from: 1, to: 4 }, { from: 1, to: 5 },
-                { from: 2, to: 101 }, { from: 2, to: 108 }, { from: 2, to: 109 },
-                { from: 3, to: 102 }, { from: 3, to: 103 }, { from: 3, to: 105 },
-                { from: 4, to: 104 }, { from: 4, to: 107 }, { from: 4, to: 112 },
-                { from: 5, to: 106 }, { from: 5, to: 110 }, { from: 5, to: 111 },
-                { from: 106, to: 301 }, { from: 108, to: 301 }, { from: 110, to: 301 },
-                { from: 104, to: 302 }, { from: 105, to: 302 }, { from: 111, to: 302 },
-                { from: 107, to: 303 }, { from: 109, to: 303 },
-                { from: 102, to: 304 }, { from: 103, to: 304 },
-                { from: 101, to: 305 }, { from: 112, to: 305 }
-            ]);
-
-            const container = document.getElementById('graph-container');
-            const data = { nodes: nodes, edges: edges };
-            const options = {
-                physics: { barnesHut: { gravitationalConstant: -4000, springLength: 110 } },
-                nodes: { shape: 'dot', size: 18, font: { color: '#ffffff', size: 13 } }
-            };
-            new vis.Network(container, data, options);
-        });
-
         // Chart 1: Outpatient/Inpatient Trend Chart
         const ctxTrend = document.getElementById('patientTrendChart').getContext('2d');
         new Chart(ctxTrend, {
@@ -719,12 +1072,8 @@ html_content = r"""<!DOCTYPE html>
 </html>
 """
 
-final_html = html_content.replace("__KATEX_CSS__", katex_css)
-final_html = final_html.replace("__VIS_JS__", vis_js)
-final_html = final_html.replace("__CHART_JS__", chart_js)
-final_html = final_html.replace("__KATEX_JS__", katex_js)
+out_file = r"C:\Users\sunjo\Desktop\luca연구에이전트\남양주백병원_7월결산_경영진단_통합보고서.html"
+with open(out_file, "w", encoding="utf-8") as f:
+    f.write(html_content)
 
-for h_p in [downloads_path_1, downloads_path_2, workspace_path]:
-    with open(h_p, "w", encoding="utf-8") as f:
-        f.write(final_html)
-    print(f"Successfully updated Master Gold Standard HTML report at: '{h_p}'")
+print(f"Successfully generated Namyangju Paik Hospital Consulting Report at:\n{out_file}")
