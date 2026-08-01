@@ -1,88 +1,57 @@
 ---
 name: park_gaeseong_consulting
-description: "/박개성컨설팅 - 엘리오앤컴퍼니 박개성 대표의 저서 34개 챕터 분석 자산과 Neo4j 온톨로지 DB(Port 7687)를 기반으로 LCK LAB - LUCA AGI SYSTEM 신경기호학적 모델(Neurosymbolic Model)과 예측형 DSS 시뮬레이션을 가동하여 R1~R4 경영 공리, 수리 방정식, 12대 테마, 4M 근육, 실증 케이스 분석, 5대 성과 열매 지식그래프 및 오프라인 자립형 단일 HTML/Word 보고서를 생성하는 전문 컨설팅 스킬입니다."
+description: "/박개성컨설팅 - 엘리오앤컴퍼니 박개성 대표 저서 34개 챕터 전수 자산과 portable 온톨로지 DB(knowledge_assets)를 탑재하여 다른 PC/장관님 컴퓨터에서도 100% 무결점으로 작동하는 LCK LAB LUCA AGI SYSTEM 신경기호학적 병원 경영 처방 스킬입니다."
 ---
 
-# 🧠🔮 /박개성컨설팅 - LCK LAB - LUCA AGI SYSTEM 5-LOOP PERFECTED CONSULTING SKILL
+# 🧠🔮 /박개성컨설팅 - LCK LAB - LUCA AGI SYSTEM 100% PORTABLE CONSULTING SKILL
 
-본 스킬은 앤드류컴퍼니/엘리오앤컴퍼니 박개성 대표의 저서 **『박개성의 병원을 경영하는 이유』(34개 챕터 전수 자산)** 및 구축된 **Neo4j 온톨로지 지식 그래프 DB(Port 7687)**를 **LCK LAB의 LUCA AGI SYSTEM 신경기호학적 모델(Neurosymbolic Hybrid Model)**과 **예측형 의사결정 시뮬레이션 엔진(Predictive DSS Engine)**으로 결합하여, 5회 품질 검증(5-Loop Assurance)을 거친 무결점 병원 경영 통합 처방 보고서를 자율적으로 생성합니다.
-
----
-
-## 🚨 MANDATORY ZERO-DEFECT QUALITY RULES (무결점 품질 필수 지침)
-
-> **[핵심 규정] 모든 보고서(HTML / Word .docx) 생성 시 다음 5대 무결점 준정 규칙을 100% 강제한다**:
-> 1. **온톨로지 지식 그래프 100% 완전 연결 (Zero Floating Nodes)**:
->    - Root (노드 1) ➔ Layer 1 Executive/4M (노드 2~5) ➔ Layer 2 T1~T12 12대 테마 전수 (노드 101~112) ➔ Layer 3 5대 성과 열매 (노드 301~305)까지 단 하나의 고립/절단 노드 없이 100% 엣지(Edges)로 연결한다.
-> 2. **T1~T12 12대 실행 테마 전수 해설 포함**:
->    - 책을 읽지 않은 경영진도 100% 이해할 수 있도록 T1(전략계획)부터 T12(신사업)까지 12개 테마의 명칭과 세부 실행 정의를 전수 해설한다.
-> 3. **R1~R4 4대 경영 공리 & 부산침례병원 파산 사례 수록**:
->    - R1(선행타격), R2(거버넌스 불변 - 부산침례병원 800병상 신축 파산 경고), R3(20배 구매레버리지), R4(4M 곱셈)를 명시한다.
-> 4. **KaTeX 수리 방정식 전수 명시**:
->    - 종합 성과 방정식 \(Y_{\text{Performance}} = f(\text{Mission}) \times \prod M_j \times \sum (T_i \cdot w_i) - \text{Friction}\) 및 R3 구매 20배 레버리지 방정식을 파라미터 정의와 함께 렌더링한다.
-> 5. **이중 출력 및 100% 오프라인 인라이닝 (Single-File Inlining Protocol)**:
->    - 오프라인 단일 HTML 파일(`*_integrated.html`)과 공식 MS Word 문서(`.docx`) 2종을 동시 발행하고 브라우저로 자동 기동한다.
+본 스킬은 앤드류컴퍼니/엘리오앤컴퍼니 박개성 대표의 저서 **『박개성의 병원을 경영하는 이유』(34개 챕터 전수 자산)** 및 **온톨로지 지식 그래프 DB(`knowledge_assets/ontology_graph.json`)**를 스킬 자체 패키지에 100% 동봉하여, **Neo4j DB 연결 여부와 상관없이 어느 PC(장관님 컴퓨터 등)에서나 100% 오프라인 자립형으로 작동**하도록 설계된 궁극의 병원 경영 처방 엔진입니다.
 
 ---
 
-## Ⅰ. 5-Loop 완결성 검증 체계 (5-Loop Assurance System)
+## 📦 PORTABLE KNOWLEDGE BUNDLE STRUCTURE (동봉 지식 자산 명세)
 
 ```
-[LOOP 1] 수리 및 기호적 무결성 검증 (Symbolic Logic & KaTeX Proof)
-         - R1~R4 경영 공리 간 상충 0% 검증, KaTeX 성과 수식 & 20배 레버리지 수식 엄밀성 보장
-[LOOP 2] 시각적 UX 및 디자인 임팩트 검증 (Luxury Midnight Glassmorphism Aesthetics & Action Matrix)
-         - Midnight Slate Card, Neon Cyan Highlight, Glassmorphism 2.0 Border, 4분면 Action Matrix
-[LOOP 3] 실시간 DSS 시뮬레이터 정밀도 검증 (Live Interactive Simulator Widget)
-         - 슬라이더 3종(T6 구매절감액, T7 대기시간 감축률, T2 보직자 역량) 변경 시 
-           예측 영업이익률(%), 순이익(억), 대기시간(분), R2 파산위험지수(%) 실시간 상호연산
-[LOOP 4] 오프라인 카카오톡/이메일 자립형 인라이닝 검증 (Single-File Inlining Protocol)
-         - Vis.js, Chart.js, KaTeX, Google Fonts 전 자산 단일 HTML 내 100% 인라이닝으로 외부 서버 의존 0%
-[LOOP 5] 5대 성과(열매) 온톨로지 지식 그래프 완결성 검증 (Fully Connected 5 Outcome Graph)
-         - 🏆재정건전성, 🏥의료품질, ❤️환자경험, 🤝조직문화, 🌱사회공헌 노드가 12대 테마 및 4M 근육과 100% 인과 연결 (고립 노드 0개)
+park_gaeseong_consulting/
+├── SKILL.md
+├── knowledge_assets/
+│   ├── ontology_graph.json          # 4M 근육, 12대 테마, 5대 성과, R1~R4 공리 온톨로지 DB
+│   └── chapters/                     # 34개 챕터 전수 심층 분석 마크다운 자산 (34 Files)
+│       ├── 01_00_프론트매터_서문_및_이책의지도_analysis.md
+│       ├── 02_1부_01_100년을_살아남은_병원은_무엇이_다른가_analysis.md
+│       └── ... (34개 챕터 전수)
+└── scripts/
+    └── build_hospital_consulting_report.py  # 100% 오프라인 HTML & Word 이중 보고서 생성기
 ```
 
 ---
 
-## Ⅱ. LCK LAB - LUCA AGI SYSTEM 보고서 4대 파트 명세
+## 🚨 DUAL-ENGINE FALLBACK PROTOCOL (이중 DB 연동 프로토콜)
 
-```markdown
-====================================================================================================
-📚 PART I. 박개성 경영 분석 프레임워크 가이드 (Core Framework Guide) - 100% 전수 설명
-====================================================================================================
-1. 🧬 Neurosymbolic 4단계 파이프라인 Architecture (Stage 1~4)
-2. 📐 수리 모델링 & KaTeX 방정식 (성과 수식 Y 및 구매 20배 레버리지 수식)
-3. ⚖️ 박개성 4대 경영 공리 (Symbolic Rules R1 ~ R4 전수 설명 & 부산침례병원 파산 사례)
-4. 📖 12대 실행 테마 (T1 ~ T12 전수 해설 표/카드 Grid 수록)
-5. 🌐 Neo4j 인터랙티브 온톨로지 지식 그래프 (5대 열매 100% 전수 연결 Vis.js - 끊어진 선 0%)
-
-====================================================================================================
-🚨 PART II. 300병상 지방 종합병원 / 남양주 백병원 실증 케이스 분석 (본론 - 실증 문제 해결 & 시각화)
-====================================================================================================
-1. 🔴 [CRISIS DIAGNOSIS RED ALERT HERO CARD] (7월 31억 달성 평가 & 장관님 지시 환자 감소 대책)
-2. 📊 [BEFORE vs AFTER 4대 KPI 비교 카드]
-3. 📌 [경영진 실행-영향력 우선순위 4분면 매트릭스 (Action vs Impact Matrix)]
-4. ⏱️ [환자 여정 단계별 대기시간 병목 가로 바 차트 (Chart.js)]
-5. 💰 [T6 구매 절감 20배 레버리지 비교 바 차트 (Chart.js)]
-
-====================================================================================================
-🔮 PART III. 예측형 시뮬레이션 및 데이터 기반 미래 예측 (Predictive DSS)
-====================================================================================================
-1. 🎛️ [LIVE INTERACTIVE DECISION SUPPORT SIMULATOR WIDGET]
-2. 🔮 [LUCA PREDICTIVE SIMULATION HERO CARD] (Year 1 390억 ➔ Year 3 480억 누적 성과)
-3. 🎲 [3대 시나리오 예측 카드 (Scenario A/B/C)]
-4. 📈 [예측형 3개년 영업이익률 & 순이익 궤적 듀얼 차트 (Chart.js)]
-
-====================================================================================================
-🚀 PART IV. 3단계 실행 로드맵 & 간트 워크스트림 파이프라인 (Visual Execution Roadmap)
-====================================================================================================
-1. 🎴 [3대 실행 페이즈 시각화 카드 (Phase 1 / Phase 2 / Phase 3)]
-2. 📊 [워크스트림별 간트 타임라인 테이블 (Gantt Workstream Pipeline Table)]
-```
+> **[핵심 규정] 본 스킬은 이중 노드 추출 가동 방식을 채택합니다:**
+> 1. **Primary Mode (Neo4j DB)**: `bolt://localhost:7687`이 구동 중일 경우 실시간 그래프 Cypher 쿼리 수행.
+> 2. **Fallback Portable Mode**: Neo4j 미설치/미구동 PC 환경(장관님 PC 등)에서는 스킬 내 동봉된 `knowledge_assets/ontology_graph.json` 및 `chapters/*.md`를 자동으로 즉각 감지·로드하여 **100% 동일한 품질의 경영 진단 보고서를 생성**.
 
 ---
 
-## Ⅲ. 실행 및 자동화 프로토콜
+## 📐 MANDATORY ZERO-DEFECT QUALITY RULES (5대 무결점 규칙)
 
-1. 사용자가 `/박개성컨설팅` 또는 병원 경영 진단 관련 질의를 요청하면, 본 스킬에 정의된 **LCK LAB - LUCA AGI SYSTEM 4-Part 전수 설명 규격**을 준수합니다.
-2. 스크립트 실행 후 `html_inliner.py` 스킬을 연동하여 모든 외부 폰트, 라이브러리(Vis.js, Chart.js, KaTeX)를 인라이닝한 **오프라인 단일 HTML 파일**과 **공식 MS Word (.docx) 문서**를 함께 생성합니다.
-3. 생성 완료 후 Windows `Start-Process` 명령을 통해 사용자의 웹 브라우저로 자동 기동합니다.
+1. **온톨로지 지식 그래프 100% 완전 연결 (Zero Floating Nodes)**:
+   - Root (노드 1) ➔ Layer 1 4M 근육 (노드 2~5) ➔ Layer 2 T1~T12 12대 테마 (노드 101~112) ➔ Layer 3 5대 성과 열매 (노드 301~305)까지 고립 노드 없이 100% 연결.
+2. **T1~T12 12대 실행 테마 전수 해설 포함**:
+   - T1(전략계획) ~ T12(신사업) 명칭 및 세부 실행 정의 전수 해설 표/카드 포함.
+3. **R1~R4 4대 경영 공리 & 부산침례병원 파산 사례 수록**:
+   - R1(선행타격), R2(거버넌스 불변 - 부산침례병원 800병상 파산 경고), R3(20배 구매레버리지), R4(4M 곱셈).
+4. **KaTeX 수리 방정식 전수 명시**:
+   - 종합 성과 방정식 \(Y_{\text{Performance}}\) 및 R3 구매 20배 레버리지 방정식 명시.
+5. **이중 출력 및 100% 오프라인 인라이닝**:
+   - 단일 HTML 파일(`*_integrated.html`)과 MS Word 문서(`.docx`) 2종 동시 발행 및 브라우저 자동 기동.
+
+---
+
+## 🚀 실행 프로토콜
+
+```bash
+# 어느 PC에서나 스킬 실행 스크립트를 즉시 가동하여 보고서 자동 생성
+python .agent/skills/park_gaeseong_consulting/scripts/build_hospital_consulting_report.py
+```

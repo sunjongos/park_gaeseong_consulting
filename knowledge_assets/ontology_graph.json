@@ -1,0 +1,57 @@
+{
+  "system_info": {
+    "title": "Park Gae-seong Hospital Management Neurosymbolic Knowledge Graph",
+    "source_book": "박개성의 병원을 경영하는 이유 (34 Chapters)",
+    "version": "2.0 Portable",
+    "updated_at": "2026-08-01"
+  },
+  "axioms": [
+    {
+      "id": "R1",
+      "name": "R1. 선행타격의 법칙 (Proactive Strike Axiom)",
+      "definition": "적자 및 위기 발생 시 인건비 삭감 등 사후 수동 대응 대신 T6(구매 자재비) 및 T7(대기시간/프로세스)을 즉각 선행 타격하여 순이익을 사전 확보한다."
+    },
+    {
+      "id": "R2",
+      "name": "R2. 거버넌스 불변 법칙 (Governance Invariance Axiom)",
+      "definition": "내부 운영체제(4M Mechanism)가 부실한 상태에서 무리한 건물 신축이나 고가 의료장비를 도입하면 파산에 이른다 (부산침례병원 800병상 신축 파산 경고 사례)."
+    },
+    {
+      "id": "R3",
+      "name": "R3. 구매 20배 레버리지 법칙 (20x Purchasing Leverage)",
+      "definition": "의료 수가 규제 하에서 물류 구매비 1원의 절감은 영업이익률 5% 기준 진료매출 20원의 이익 가치를 가진다 (100억 절감 = 2,000억 매출 증대 효과)."
+    },
+    {
+      "id": "R4",
+      "name": "R4. 4M 조직 근육 곱셈 법칙 (4M Multiplication Axiom)",
+      "definition": "병원 종합 성과 Y = Mapping(기획) * Manpower(인재) * Mastery(숙련) * Mechanism(운영체제) 의 곱이다. 어느 하나라도 0에 가까우면 전체 성과는 0이 된다."
+    }
+  ],
+  "muscles_4m": [
+    {"id": "M1", "name": "Mapping", "code_name": "기획력", "description": "전략 수립 및 미션 얼라인먼트"},
+    {"id": "M2", "name": "Manpower", "code_name": "인재역량", "description": "보직자 리더십 및 조직문화"},
+    {"id": "M3", "name": "Mastery", "code_name": "지적자산", "description": "진료 품질 및 중증 질환 전문성"},
+    {"id": "M4", "name": "Mechanism", "code_name": "운영체제", "description": "물류 구매, 프로세스, IT 정보시스템"}
+  ],
+  "themes_12": [
+    {"id": "T1", "name": "전략계획", "muscle": "M1", "outcome": "🌱 사회공헌", "desc": "미션 재정립 및 경영진-진료과 간 성과 목표 일치화"},
+    {"id": "T2", "name": "리더십/보직자", "muscle": "M2", "outcome": "🤝 조직문화", "desc": "진료과장/부원장 경영 마인드 교육 및 KPI 책임 부여"},
+    {"id": "T3", "name": "조직문화", "muscle": "M2", "outcome": "🤝 조직문화", "desc": "부서 간 장벽 허물기 및 다면 성과 인센티브 설계"},
+    {"id": "T4", "name": "진료/의료품질", "muscle": "M3", "outcome": "🏥 의료품질", "desc": "상급종합병원 본연의 중증 진료 집중 및 수술실 가동률 극대화"},
+    {"id": "T5", "name": "간호/경영지원", "muscle": "M2", "outcome": "🏥 의료품질", "desc": "전공의 부재를 보완하는 전담간호사 업무 표준화 및 효율화"},
+    {"id": "T6", "name": "물류/구매", "muscle": "M4", "outcome": "🏆 재정건전성", "desc": "통합 표준 구매 및 글로벌/국내 가격 비교를 통한 10% 절감"},
+    {"id": "T7", "name": "환자경험/대기", "muscle": "M3", "outcome": "❤️ 환자경험", "desc": "접수-진료-검사-수수료 대기시간 40% 단축 프로세스 혁신"},
+    {"id": "T8", "name": "수가/원가", "muscle": "M1", "outcome": "🏆 재정건전성", "desc": "비상경영 수가 항목 발굴 및 행위별 정확한 ABC 원가 산정"},
+    {"id": "T9", "name": "마케팅/원외", "muscle": "M1", "outcome": "❤️ 환자경험", "desc": "1·2차 병의원 회송-의뢰 시스템 원활화로 회송율 제고"},
+    {"id": "T10", "name": "시설/공간", "muscle": "M4", "outcome": "🏆 재정건전성", "desc": "휴동 병동 유연 통합 운영으로 고정 가동비 최적화"},
+    {"id": "T11", "name": "정보시스템", "muscle": "M4", "outcome": "🏥 의료품질", "desc": "AI 행정 자동화 및 EHR 기반 대기예측 시스템 구축"},
+    {"id": "T12", "name": "신사업/연구", "muscle": "M3", "outcome": "🌱 사회공헌", "desc": "국가중앙병원 라이선스 아웃 및 산학연 연구 수익 확대"}
+  ],
+  "outcomes_5": [
+    {"id": "O1", "name": "🏆 재정건전성"},
+    {"id": "O2", "name": "🏥 의료품질"},
+    {"id": "O3", "name": "❤️ 환자경험"},
+    {"id": "O4", "name": "🤝 조직문화"},
+    {"id": "O5", "name": "🌱 사회공헌"}
+  ]
+}
