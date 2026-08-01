@@ -1,6 +1,6 @@
 # 🧠🔮 LCK LAB - LUCA AGI SYSTEM: /박개성컨설팅 AI 스킬
 
-> **비공개(Private) 레포지토리**  
+> **공개(Public) 레포지토리**  
 > 본 레포지거리는 앤드류컴퍼니/엘리오앤컴퍼니 박개성 대표의 저서 『박개성의 병원을 경영하는 이유』(34개 챕터 전수 자산)와 Neo4j 온톨로지 DB를 기반으로, **진료실 및 본부 LUCA AGI SYSTEM**에서 병원 경영 진단, 수리적 문제 해결, 그리고 3개년 예측 보고서를 자동 생성하는 Antigravity IDE 전용 AI 스킬입니다.
 
 ---
@@ -41,8 +41,8 @@ cd C:\Users\<사용자계정>\.gemini\antigravity-ide\skills
 cd c:\Users\<사용자계정>\Desktop\luca연구에이전트\.agent\skills
 ```
 
-### 2단계: GitHub Private 레포지토리 Clone
-본 비공개 레포지토리를 Clone합니다.
+### 2단계: GitHub Public 레포지토리 Clone
+본 공개 레포지토리를 Clone합니다. 별도 로그인 없이 즉시 다운로드됩니다.
 
 ```bash
 git clone https://github.com/sunjongos/park_gaeseong_consulting.git park_gaeseong_consulting
@@ -73,9 +73,8 @@ AGI 시스템이 무결성 검증을 거친 후, **카카오톡/이메일 전송
 
 ---
 
-## 🔒 보안 및 기밀 유지 (Security Note)
+## 🔒 보안 및 독립 연산 (Security Note)
 
-* 본 스킬과 소스 코드는 **비공개(Private Repository)**로 보호됩니다.
 * 인라이닝된 HTML 보고서는 인터넷 연결이 없는 오프라인 환경에서도 100% 정상 작동하며 외부 데이터 유출이 없습니다.
 
 ---
