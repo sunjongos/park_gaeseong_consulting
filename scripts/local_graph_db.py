@@ -4,9 +4,9 @@ import json
 
 class LocalGraphDB:
     """
-    Containerized / Embedded Local Graph DB Engine
-    Operates like an embedded Neo4j DB for domain-specific Neurosymbolic reasoning.
-    Does not require external Neo4j server processes.
+    100% Embedded SQLite Graph Ontology Engine (Property Graph on SQLite)
+    Supports Recursive Multi-Hop Graph Traversal (Recursive CTE), Node/Edge Lookup,
+    and Cypher-equivalent Graph Queries without needing external Neo4j servers.
     """
     def __init__(self, db_path=None):
         if not db_path:
@@ -18,6 +18,46 @@ class LocalGraphDB:
         if not os.path.exists(self.db_path):
             raise FileNotFoundError(f"Embedded Domain Ontology DB not found at: {self.db_path}")
         return sqlite3.connect(self.db_path)
+
+    def recursive_graph_traversal(self, start_node_id=1, max_depth=3):
+        """
+        Executes Recursive Multi-Hop Graph Traversal (Equivalent to Neo4j Cypher `MATCH (a)-[*1..3]->(b)`)
+        """
+        conn = self.get_connection()
+        cursor = conn.cursor()
+        query = """
+        WITH RECURSIVE OntologyPath(from_id, from_name, to_id, to_name, rel_type, depth) AS (
+            SELECT n1.id, n1.name, n2.id, n2.name, e.rel_type, 1
+            FROM edges e
+            JOIN nodes n1 ON e.from_id = n1.id
+            JOIN nodes n2 ON e.to_id = n2.id
+            WHERE n1.id = ?
+            
+            UNION ALL
+            
+            SELECT n1.id, n1.name, n2.id, n2.name, e.rel_type, op.depth + 1
+            FROM edges e
+            JOIN nodes n1 ON e.from_id = n1.id
+            JOIN nodes n2 ON e.to_id = n2.id
+            JOIN OntologyPath op ON e.from_id = op.to_id
+            WHERE op.depth < ?
+        )
+        SELECT depth, from_id, from_name, rel_type, to_id, to_name FROM OntologyPath ORDER BY depth;
+        """
+        cursor.execute(query, (start_node_id, max_depth))
+        rows = cursor.fetchall()
+        paths = []
+        for r in rows:
+            paths.append({
+                "depth": r[0],
+                "from_id": r[1],
+                "from_name": r[2],
+                "rel_type": r[3],
+                "to_id": r[4],
+                "to_name": r[5]
+            })
+        conn.close()
+        return paths
 
     def query_all_nodes(self):
         conn = self.get_connection()
@@ -91,6 +131,7 @@ class LocalGraphDB:
         return {
             "nodes": self.query_all_nodes(),
             "edges": self.query_all_edges(),
+            "paths": self.recursive_graph_traversal(start_node_id=1, max_depth=3),
             "axioms": self.query_axioms(),
             "chapters_count": len(self.query_chapter_knowledge())
         }
@@ -98,4 +139,4 @@ class LocalGraphDB:
 if __name__ == "__main__":
     graph_db = LocalGraphDB()
     ontology = graph_db.get_full_graph_ontology()
-    print(f"Local Graph DB Query Success: {len(ontology['nodes'])} Nodes, {len(ontology['edges'])} Edges, {len(ontology['axioms'])} Axioms!")
+    print(f"Local Graph DB Multi-Hop Query Success: {len(ontology['nodes'])} Nodes, {len(ontology['paths'])} Recursive Paths, {len(ontology['axioms'])} Axioms!")
